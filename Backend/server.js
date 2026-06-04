@@ -3,8 +3,10 @@ const protect = require("./middleware/auth");
 const cors = require("cors");
 const dotenv = require("dotenv");
 
+
 const connectDB = require("./config/db");
 const authRoutes = require("./routes/authRoutes");
+const userRoutes = require("./routes/userRoutes");
 
 dotenv.config();
 
@@ -18,6 +20,7 @@ app.use(express.json());
 
 // Routes
 app.use("/api/auth", authRoutes);
+app.use("/api/user", userRoutes);
 
 app.get("/", (req, res) => {
   res.send("FitFlow API Running...");
