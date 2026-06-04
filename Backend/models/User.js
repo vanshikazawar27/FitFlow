@@ -44,6 +44,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    experience: {
+  type: String,
+  default: "",
+},
+
+daysPerWeek: {
+  type: Number,
+  default: 0,
+},
   },
   {
     timestamps: true,

@@ -5,6 +5,7 @@ import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Profile from "./pages/Profile";
+import WorkoutPlan from "./pages/WorkoutPlan";
 
 function App() {
   return (
@@ -40,7 +41,12 @@ function App() {
          </ProtectedRoute>
          }
        />
+       <Route
+          path="/workout-plan"
+          element={<WorkoutPlan />}
+        />
     </Routes>
+    
     
     
   );

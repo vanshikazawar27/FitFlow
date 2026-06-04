@@ -8,6 +8,8 @@ function Profile() {
     height: "",
     weight: "",
     goal: "",
+    experience: "",
+    daysPerWeek: "",
   });
 
   const handleChange = (e) => {
@@ -102,6 +104,36 @@ function Profile() {
             Maintain Weight
           </option>
         </select>
+        
+        <select
+  name="experience"
+  onChange={handleChange}
+  className="border p-2 w-full mb-3 rounded"
+>
+  <option value="">
+    Select Experience
+  </option>
+
+  <option value="Beginner">
+    Beginner
+  </option>
+
+  <option value="Intermediate">
+    Intermediate
+  </option>
+
+  <option value="Advanced">
+    Advanced
+  </option>
+</select>
+
+<input
+  type="number"
+  name="daysPerWeek"
+  placeholder="Workout Days Per Week"
+  onChange={handleChange}
+  className="border p-2 w-full mb-4 rounded"
+/>
 
         <button
           type="submit"

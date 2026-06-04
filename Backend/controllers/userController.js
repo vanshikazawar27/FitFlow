@@ -3,12 +3,14 @@ const User = require("../models/User");
 const updateProfile = async (req, res) => {
   try {
     const {
-      age,
-      gender,
-      height,
-      weight,
-      goal,
-    } = req.body;
+  age,
+  gender,
+  height,
+  weight,
+  goal,
+  experience,
+  daysPerWeek,
+} = req.body;
 
     const user = await User.findById(
       req.user.id
@@ -25,6 +27,8 @@ const updateProfile = async (req, res) => {
     user.height = height;
     user.weight = weight;
     user.goal = goal;
+    user.experience = experience;
+    user.daysPerWeek = daysPerWeek;
 
     await user.save();
 

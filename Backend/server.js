@@ -1,14 +1,21 @@
-const express = require("express");
-const protect = require("./middleware/auth");
-const cors = require("cors");
 const dotenv = require("dotenv");
+dotenv.config();
 
+const express = require("express");
+const cors = require("cors");
 
 const connectDB = require("./config/db");
+
 const authRoutes = require("./routes/authRoutes");
 const userRoutes = require("./routes/userRoutes");
+const aiRoutes = require("./routes/aiRoutes");
 
-dotenv.config();
+const protect = require("./middleware/auth");
+
+console.log(
+  "OPENROUTER:",
+  process.env.OPENROUTER_API_KEY
+);
 
 connectDB();
 
@@ -21,17 +28,28 @@ app.use(express.json());
 // Routes
 app.use("/api/auth", authRoutes);
 app.use("/api/user", userRoutes);
+app.use("/api/ai", aiRoutes);
 
 app.get("/", (req, res) => {
   res.send("FitFlow API Running...");
 });
 
+// Protected Route Test
+app.get(
+  "/api/protected",
+  protect,
+  (req, res) => {
+    res.json({
+      message: "Protected data",
+      user: req.user,
+    });
+  }
+);
+
 const PORT = process.env.PORT || 5000;
 
-app.get('/api/protected', protect, (req, res) => {
-  res.json({ message: 'Protected data', user: req.user });
-});
-
 app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
+  console.log(
+    `Server running on port ${PORT}`
+  );
 });
