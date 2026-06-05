@@ -170,7 +170,7 @@ function Dashboard() {
   >
     Generate AI Workout Plan
   </button>
-</div>
+
 
 <button
   onClick={() =>
@@ -180,6 +180,19 @@ function Dashboard() {
 >
   AI Diet Planner 🍎
 </button>
+</div> 
+
+<div className="mt-8">
+<button
+  onClick={() =>
+    navigate("/fitness-chat")
+  }
+  className="bg-purple-600 text-white px-6 py-3 rounded-lg"
+>
+  AI Fitness Coach 🤖
+</button>
+
+</div>
 
       </div>
     </div>

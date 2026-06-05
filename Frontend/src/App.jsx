@@ -7,6 +7,7 @@ import ProtectedRoute from "./routes/ProtectedRoute";
 import Profile from "./pages/Profile";
 import WorkoutPlan from "./pages/WorkoutPlan";
 import DietPlan from "./pages/DietPlan";
+import FitnessChat from "./pages/FitnessChat";
 
 function App() {
   return (
@@ -49,7 +50,11 @@ function App() {
         <Route
         path="/diet-plan"
         element={<DietPlan />}
-/>
+        />
+        <Route
+        path="/fitness-chat"
+        element={<FitnessChat />}
+        />
     </Routes>
     
     
