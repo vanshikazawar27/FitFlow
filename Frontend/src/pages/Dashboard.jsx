@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+import DownloadReport from "../components/DownloadReport";
 
 import {
   calculateBMI,
@@ -161,7 +162,7 @@ function Dashboard() {
   </p>
 </div>
 
-<div className="mt-8">
+<div className="mt-8 flex flex-wrap gap-4">
   <button
     onClick={() =>
       navigate("/workout-plan")
@@ -176,31 +177,33 @@ function Dashboard() {
   onClick={() =>
     navigate("/diet-plan")
   }
-  className="bg-green-600 text-white px-6 py-3 rounded-lg ml-4"
+  className="bg-yellow-600 text-white px-6 py-3 rounded-lg ml-4"
 >
   AI Diet Planner 🍎
 </button>
 </div> 
 
-<div className="mt-8">
-<button
-  onClick={() =>
-    navigate("/fitness-chat")
-  }
-  className="bg-purple-600 text-white px-6 py-3 rounded-lg"
->
-  AI Fitness Coach 🤖
-</button>
+<div className="mt-8 flex flex-wrap gap-4">
 
+  <button
+    onClick={() =>
+      navigate("/fitness-chat")
+    }
+    className="bg-purple-600 text-white px-6 py-3 rounded-lg"
+  >
+    AI Fitness Coach 🤖
+  </button>
 
-<button
-  onClick={() =>
-    navigate("/progress")
-  }
-  className="bg-indigo-600 text-white px-6 py-3 rounded-lg"
->
-  Progress Tracker 📈
-</button>
+  <button
+    onClick={() =>
+      navigate("/progress")
+    }
+    className="bg-indigo-600 text-white px-6 py-3 rounded-lg"
+  >
+    Progress Tracker 📈
+  </button>
+
+  <DownloadReport />
 
 </div>
 
@@ -208,5 +211,7 @@ function Dashboard() {
     </div>
   );
 }
+
+
 
 export default Dashboard;
