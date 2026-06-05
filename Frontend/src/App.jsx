@@ -8,6 +8,7 @@ import Profile from "./pages/Profile";
 import WorkoutPlan from "./pages/WorkoutPlan";
 import DietPlan from "./pages/DietPlan";
 import FitnessChat from "./pages/FitnessChat";
+import Progress from "./pages/Progress";
 
 function App() {
   return (
@@ -55,6 +56,10 @@ function App() {
         path="/fitness-chat"
         element={<FitnessChat />}
         />
+        <Route
+          path="/progress"
+          element={<Progress />}
+         />
     </Routes>
     
     

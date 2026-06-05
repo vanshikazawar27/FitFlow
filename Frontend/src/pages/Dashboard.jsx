@@ -192,6 +192,16 @@ function Dashboard() {
   AI Fitness Coach 🤖
 </button>
 
+
+<button
+  onClick={() =>
+    navigate("/progress")
+  }
+  className="bg-indigo-600 text-white px-6 py-3 rounded-lg"
+>
+  Progress Tracker 📈
+</button>
+
 </div>
 
       </div>
