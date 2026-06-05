@@ -1,4 +1,8 @@
-const Progress = require("../models/Progress");
+const Progress = require("../models/Progress")
+const {
+  calculateCurrentStreak,
+  calculateLongestStreak,
+} = require("../utils/streakCalculator");;
 
 const addProgress = async (
   req,
@@ -98,7 +102,39 @@ const getProgress = async (
   }
 };
 
+const getStreak = async (
+  req,
+  res
+) => {
+  try {
+    const progress =
+      await Progress.find({
+        user: req.user.id,
+      });
+
+    const currentStreak =
+      calculateCurrentStreak(
+        progress
+      );
+
+    const longestStreak =
+      calculateLongestStreak(
+        progress
+      );
+
+    res.json({
+      currentStreak,
+      longestStreak,
+    });
+  } catch (error) {
+    res.status(500).json({
+      message: error.message,
+    });
+  }
+};
+
 module.exports = {
   addProgress,
   getProgress,
+  getStreak,
 };

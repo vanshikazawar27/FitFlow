@@ -12,51 +12,55 @@ import {
 } from "recharts";
 
 function Progress() {
-  const [weight, setWeight] =
-    useState("");
-
-  const [data, setData] =
-    useState([]);
-
-  const [range, setRange] =
-    useState("7d");
-
-  const [user, setUser] =
-    useState(null);
+  const [weight, setWeight] = useState("");
+  const [data, setData] = useState([]);
+  const [range, setRange] = useState("7d");
+  const [user, setUser] = useState(null);
+  const [streak, setStreak] = useState(0);
 
   const fetchProgress = async () => {
     try {
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-      // Progress Data
-      const progressRes =
-        await API.get(
-          `/progress?range=${range}`,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+      const progressRes = await API.get(
+        `/progress?range=${range}`,
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setData(progressRes.data);
 
-      // User Profile
-      const profileRes =
-        await API.get(
-          "/user/profile",
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-            },
-          }
-        );
+      const profileRes = await API.get(
+        "/user/profile",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       setUser(profileRes.data);
     } catch (error) {
       console.log(error);
     }
+    const streakRes =
+  await API.get(
+    "/progress/streak",
+    {
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      },
+    }
+  );
+
+setStreak(
+  streakRes.data
+    .currentStreak
+);
   };
 
   useEffect(() => {
@@ -65,8 +69,7 @@ function Progress() {
 
   const addWeight = async () => {
     try {
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
       await API.post(
         "/progress",
@@ -81,27 +84,22 @@ function Progress() {
       );
 
       setWeight("");
-
       fetchProgress();
     } catch (error) {
       console.log(error);
     }
   };
 
-  const chartData = data.map(
-    (item) => ({
-      date: new Date(
-        item.createdAt
-      ).toLocaleDateString(),
-
-      weight: item.weight,
-    })
-  );
+  const chartData = data.map((item) => ({
+    date: new Date(
+      item.createdAt
+    ).toLocaleDateString(),
+    weight: item.weight,
+  }));
 
   const currentWeight =
     data.length > 0
-      ? data[data.length - 1]
-          .weight
+      ? data[data.length - 1].weight
       : 0;
 
   const startingWeight =
@@ -110,12 +108,10 @@ function Progress() {
       : 0;
 
   const weightChange = (
-    startingWeight -
-    currentWeight
+    startingWeight - currentWeight
   ).toFixed(1);
 
-  const totalEntries =
-    data.length;
+  const totalEntries = data.length;
 
   const goalWeight =
     user?.goalWeight || 0;
@@ -123,31 +119,27 @@ function Progress() {
   let progressPercent = 0;
 
   if (
-    goalWeight &&
-    startingWeight &&
-    currentWeight &&
-    startingWeight !==
-      goalWeight
+    goalWeight > 0 &&
+    startingWeight > 0 &&
+    currentWeight > 0 &&
+    startingWeight !== goalWeight
   ) {
-    progressPercent =
-      Math.min(
-        100,
-        Math.max(
-          0,
-          Math.round(
-            ((startingWeight -
-              currentWeight) /
-              (startingWeight -
-                goalWeight)) *
-              100
-          )
-        )
-      );
+    progressPercent = Math.round(
+      ((startingWeight -
+        currentWeight) /
+        (startingWeight -
+          goalWeight)) *
+        100
+    );
+
+    progressPercent = Math.max(
+      0,
+      Math.min(progressPercent, 100)
+    );
   }
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
-
       <h1 className="text-4xl font-bold mb-6">
         Progress Tracker 📈
       </h1>
@@ -159,16 +151,14 @@ function Progress() {
           placeholder="Current Weight"
           value={weight}
           onChange={(e) =>
-            setWeight(
-              e.target.value
-            )
+            setWeight(e.target.value)
           }
           className="border p-3 rounded mr-4"
         />
 
         <button
           onClick={addWeight}
-          className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+          className="bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700"
         >
           Save Weight
         </button>
@@ -183,9 +173,7 @@ function Progress() {
         <select
           value={range}
           onChange={(e) =>
-            setRange(
-              e.target.value
-            )
+            setRange(e.target.value)
           }
           className="border p-2 rounded-lg"
         >
@@ -245,9 +233,7 @@ function Progress() {
 
           <p
             className={`text-3xl font-bold ${
-              Number(
-                weightChange
-              ) > 0
+              Number(weightChange) >= 0
                 ? "text-green-600"
                 : "text-red-600"
             }`}
@@ -270,7 +256,6 @@ function Progress() {
 
       {/* Goal Progress */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">
-
         <h2 className="text-2xl font-bold mb-4">
           Goal Progress 🎯
         </h2>
@@ -284,7 +269,6 @@ function Progress() {
         </p>
 
         <div className="w-full bg-gray-200 rounded-full h-8">
-
           <div
             className="bg-green-600 h-8 rounded-full flex items-center justify-center text-white font-bold"
             style={{
@@ -293,14 +277,11 @@ function Progress() {
           >
             {progressPercent}%
           </div>
-
         </div>
-
       </div>
 
-      {/* Chart */}
+      {/* Weight Chart */}
       <div className="bg-white p-6 rounded-xl shadow">
-
         <h2 className="text-2xl font-bold mb-4">
           Weight Progress
         </h2>
@@ -309,9 +290,7 @@ function Progress() {
           width="100%"
           height={400}
         >
-          <LineChart
-            data={chartData}
-          >
+          <LineChart data={chartData}>
             <CartesianGrid strokeDasharray="3 3" />
 
             <XAxis dataKey="date" />
@@ -328,9 +307,17 @@ function Progress() {
             />
           </LineChart>
         </ResponsiveContainer>
-
       </div>
 
+      <div className="bg-white p-6 rounded-xl shadow">
+  <h3 className="text-gray-500">
+    Current Streak
+  </h3>
+
+  <p className="text-3xl font-bold text-red-600">
+    🔥 {streak}
+  </p>
+</div>
     </div>
   );
 }

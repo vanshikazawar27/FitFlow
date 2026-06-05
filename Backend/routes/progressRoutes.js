@@ -3,6 +3,7 @@ const express = require("express");
 const {
   addProgress,
   getProgress,
+  getStreak,
 } = require(
   "../controllers/progressController"
 );
@@ -24,5 +25,13 @@ router.get(
   protect,
   getProgress
 );
+
+router.get(
+  "/streak",
+  protect,
+  getStreak
+);
+
+
 
 module.exports = router;
