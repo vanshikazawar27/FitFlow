@@ -6,6 +6,7 @@ import Dashboard from "./pages/Dashboard";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import Profile from "./pages/Profile";
 import WorkoutPlan from "./pages/WorkoutPlan";
+import DietPlan from "./pages/DietPlan";
 
 function App() {
   return (
@@ -45,6 +46,10 @@ function App() {
           path="/workout-plan"
           element={<WorkoutPlan />}
         />
+        <Route
+        path="/diet-plan"
+        element={<DietPlan />}
+/>
     </Routes>
     
     

@@ -172,6 +172,15 @@ function Dashboard() {
   </button>
 </div>
 
+<button
+  onClick={() =>
+    navigate("/diet-plan")
+  }
+  className="bg-green-600 text-white px-6 py-3 rounded-lg ml-4"
+>
+  AI Diet Planner 🍎
+</button>
+
       </div>
     </div>
   );
