@@ -1,41 +1,42 @@
 const User = require("../models/User");
 
-const updateProfile = async (req, res) => {
+const updateProfile = async (
+  req,
+  res
+) => {
   try {
     const {
-  age,
-  gender,
-  height,
-  weight,
-  goal,
-  experience,
-  daysPerWeek,
-} = req.body;
+      age,
+      gender,
+      height,
+      weight,
+      goal,
+      goalWeight,
+      experience,
+      daysPerWeek,
+    } = req.body;
 
-    const user = await User.findById(
-      req.user.id
-    );
-
-    if (!user) {
-      return res.status(404).json({
-        message: "User not found",
-      });
-    }
+    const user =
+      await User.findById(
+        req.user.id
+      );
 
     user.age = age;
     user.gender = gender;
     user.height = height;
     user.weight = weight;
     user.goal = goal;
-    user.experience = experience;
-    user.daysPerWeek = daysPerWeek;
+    user.goalWeight = goalWeight;
+
+    user.experience =
+      experience;
+
+    user.daysPerWeek =
+      daysPerWeek;
 
     await user.save();
 
-    res.json({
-      success: true,
-      user,
-    });
+    res.json(user);
   } catch (error) {
     res.status(500).json({
       message: error.message,

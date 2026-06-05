@@ -44,10 +44,15 @@ const userSchema = new mongoose.Schema(
       type: String,
       default: "",
     },
+    goalWeight: {
+  type: Number,
+  default: null,
+},
     experience: {
   type: String,
   default: "",
 },
+
 
 daysPerWeek: {
   type: Number,

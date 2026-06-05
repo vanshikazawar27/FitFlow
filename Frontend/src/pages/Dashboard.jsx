@@ -118,6 +118,16 @@ function Dashboard() {
           </p>
         </div>
 
+        <div className="bg-white rounded-xl shadow p-6">
+  <h2 className="text-xl font-bold mb-2">
+    Goal Weight
+  </h2>
+
+  <p className="text-3xl font-bold text-green-600">
+    {user.goalWeight || "Not Set"} kg
+  </p>
+</div>
+
         {/* Height Card */}
 <div className="bg-white rounded-xl shadow p-6">
   <h2 className="text-xl font-bold mb-2">

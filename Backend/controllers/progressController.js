@@ -26,17 +26,74 @@ const getProgress = async (
   res
 ) => {
   try {
+    const { range } = req.query;
+
+    let filter = {
+      user: req.user.id,
+    };
+
+    if (
+      range &&
+      range !== "all"
+    ) {
+      const now = new Date();
+
+      let startDate =
+        new Date();
+
+      switch (range) {
+        case "7d":
+          startDate.setDate(
+            now.getDate() - 7
+          );
+          break;
+
+        case "30d":
+          startDate.setDate(
+            now.getDate() - 30
+          );
+          break;
+
+        case "3m":
+          startDate.setMonth(
+            now.getMonth() - 3
+          );
+          break;
+
+        case "6m":
+          startDate.setMonth(
+            now.getMonth() - 6
+          );
+          break;
+
+        case "1y":
+          startDate.setFullYear(
+            now.getFullYear() - 1
+          );
+          break;
+
+        default:
+          startDate = null;
+      }
+
+      if (startDate) {
+        filter.createdAt = {
+          $gte: startDate,
+        };
+      }
+    }
+
     const progress =
-      await Progress.find({
-        user: req.user.id,
-      }).sort({
-        createdAt: 1,
-      });
+      await Progress.find(filter)
+        .sort({
+          createdAt: 1,
+        });
 
     res.json(progress);
   } catch (error) {
     res.status(500).json({
-      message: error.message,
+      message:
+        error.message,
     });
   }
 };
