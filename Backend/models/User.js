@@ -51,7 +51,7 @@ const userSchema = new mongoose.Schema(
 
 daysPerWeek: {
   type: Number,
-  default: 0,
+  default: 3,
 },
   },
   {

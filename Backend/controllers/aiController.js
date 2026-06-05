@@ -1,25 +1,27 @@
 const OpenAI = require("openai");
 const User = require("../models/User");
-
-console.log(process.env.OPENROUTER_API_KEY);
+const WorkoutPlan = require("../models/WorkoutPlan");
 
 const client = new OpenAI({
   baseURL: "https://openrouter.ai/api/v1",
   apiKey: process.env.OPENROUTER_API_KEY,
 });
 
+// Generate Workout Plan
 const generateWorkoutPlan = async (req, res) => {
   try {
     const user = await User.findById(req.user.id);
 
     const prompt = `
-Generate a weekly workout plan.
+Generate a professional weekly workout plan.
 
+User Details:
 Goal: ${user.goal}
-Experience: ${user.experience}
-Days Per Week: ${user.daysPerWeek}
+Age: ${user.age}
+Weight: ${user.weight} kg
+Height: ${user.height} cm
 
-Return a clean day-wise workout schedule.
+Return a day-wise workout schedule for 7 days.
 `;
 
     const completion =
@@ -36,7 +38,13 @@ Return a clean day-wise workout schedule.
     const workoutPlan =
       completion.choices[0].message.content;
 
-    res.json({
+    // Save plan to MongoDB
+    await WorkoutPlan.create({
+      user: user._id,
+      plan: workoutPlan,
+    });
+
+    res.status(200).json({
       success: true,
       workoutPlan,
     });
@@ -44,6 +52,25 @@ Return a clean day-wise workout schedule.
     console.log(error);
 
     res.status(500).json({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+// Get All Saved Workout Plans
+const getWorkoutPlans = async (req, res) => {
+  try {
+    const plans = await WorkoutPlan.find({
+      user: req.user.id,
+    }).sort({
+      createdAt: -1,
+    });
+
+    res.status(200).json(plans);
+  } catch (error) {
+    res.status(500).json({
+      success: false,
       message: error.message,
     });
   }
@@ -51,4 +78,5 @@ Return a clean day-wise workout schedule.
 
 module.exports = {
   generateWorkoutPlan,
+  getWorkoutPlans,
 };
