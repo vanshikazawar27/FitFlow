@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
+import { Link } from "react-router-dom";
 
 import {
   LineChart,
@@ -15,11 +16,13 @@ import {
 
 function Progress() {
   const [weight, setWeight] = useState("");
-  const [data, setData] = useState([]);
-  const [range, setRange] = useState("7d");
-  const [user, setUser] = useState(null);
-  const [streak, setStreak] = useState(0);
-  const [badges, setBadges] = useState([]);
+const [data, setData] = useState([]);
+const [range, setRange] = useState("7d");
+const [user, setUser] = useState(null);
+const [streak, setStreak] = useState(0);
+const [badges, setBadges] = useState([]);
+const [photos, setPhotos] = useState([]);
+
 
   const fetchProgress = async () => {
     try {
@@ -60,16 +63,35 @@ function Progress() {
         streakRes.data.currentStreak || 0
       );
 
-      const badgeRes = await API.get(
-        "/progress/badges",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+      try {
+  const badgeRes = await API.get(
+    "/progress/badges",
+    {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    }
+  );
 
-      setBadges(badgeRes.data || []);
+  setBadges(badgeRes.data || []);
+} catch (err) {
+  console.log("Badges API failed");
+  setBadges([]);
+}
+//       try {
+//   const photoRes = await API.get(
+//     "/progress-photos",
+//     {
+//       headers: {
+//         Authorization: `Bearer ${token}`,
+//       },
+//     }
+//   );
+
+//   setPhotos(photoRes.data || []);
+// } catch (err) {
+//   console.log("Photo Error:", err);
+// }
     } catch (error) {
       console.log(error);
     }
@@ -521,6 +543,43 @@ const predictedWeight30Days =
           </p>
         )}
       </div>
+
+  {/* progress photos */}
+  <div className="bg-white p-6 rounded-xl shadow mb-6">
+
+  <div className="flex justify-between items-center mb-4">
+
+    <h2 className="text-2xl font-bold">
+      Progress Photos 📸
+    </h2>
+
+    <Link
+      to="/progress-photos"
+      className="text-blue-600"
+    >
+      View All →
+    </Link>
+
+  </div>
+
+  <div className="grid grid-cols-3 gap-4">
+  {photos.length > 0 ? (
+    photos.slice(0, 3).map((photo) => (
+      <img
+        key={photo._id}
+        src={`http://localhost:5000/uploads/${photo.imageUrl}`}
+        alt="progress"
+        className="rounded-lg h-40 w-full object-cover"
+      />
+    ))
+  ) : (
+    <p className="text-gray-500">
+      No progress photos uploaded yet.
+    </p>
+  )}
+</div>
+
+</div>
 
       {/* Chart */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">

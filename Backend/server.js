@@ -14,6 +14,7 @@ const chatRoutes = require("./routes/chatRoutes");
 const progressRoutes = require("./routes/progressRoutes");
 const reportRoutes = require("./routes/reportRoutes");
 const workoutRoutes = require("./routes/workoutRoutes");
+//const progressPhotoRoutes = require("./routes/progressPhotoRoutes");
 
 const protect = require("./middleware/auth");
 
@@ -29,6 +30,12 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
+// app.use(
+//   "/uploads",
+//   express.static(
+//     "uploads"
+//   )
+// );
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -39,6 +46,8 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/report", reportRoutes);
 app.use("/api/workout", workoutRoutes);
+//app.use("/api/photos", progressPhotoRoutes);
+
 
 app.get("/", (req, res) => {
   res.send("FitFlow API Running...");

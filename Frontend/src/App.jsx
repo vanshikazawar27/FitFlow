@@ -11,6 +11,7 @@ import FitnessChat from "./pages/FitnessChat";
 import Progress from "./pages/Progress";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import DietHistory from "./pages/DietHistory";
+//import ProgressPhoto from "./pages/ProgressPhoto";
 
 function App() {
   return (
@@ -70,6 +71,10 @@ function App() {
            path="/diet-history"
            element={<DietHistory />}
           />
+          {/* <Route
+          path="/progress-photos"
+          element={<ProgressPhoto />}
+          /> */}
     </Routes>
     
     
