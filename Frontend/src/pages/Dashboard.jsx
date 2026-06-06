@@ -213,6 +213,28 @@ function Dashboard() {
     Progress Tracker 📈
   </button>
 
+  {/* <button
+  onClick={() =>
+    navigate(
+      "/workout-history"
+    )
+  }
+  className="bg-blue-600 text-white px-6 py-3 rounded-lg"
+>
+  Workout History 📚
+</button>
+
+<button
+  onClick={() =>
+    navigate(
+      "/diet-history"
+    )
+  }
+  className="bg-orange-600 text-white px-6 py-3 rounded-lg ml-4"
+>
+  Diet History 🍎
+</button> */}
+
   <DownloadReport />
 
 </div>

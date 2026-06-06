@@ -9,6 +9,8 @@ import WorkoutPlan from "./pages/WorkoutPlan";
 import DietPlan from "./pages/DietPlan";
 import FitnessChat from "./pages/FitnessChat";
 import Progress from "./pages/Progress";
+import WorkoutHistory from "./pages/WorkoutHistory";
+import DietHistory from "./pages/DietHistory";
 
 function App() {
   return (
@@ -60,6 +62,14 @@ function App() {
           path="/progress"
           element={<Progress />}
          />
+         <Route
+          path="/workout-history"
+          element={<WorkoutHistory />}
+          />
+          <Route
+           path="/diet-history"
+           element={<DietHistory />}
+          />
     </Routes>
     
     

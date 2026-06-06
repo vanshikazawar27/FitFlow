@@ -1,38 +1,14 @@
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import API from "../services/api";
+import { useNavigate } from "react-router-dom";
 
 function DietPlan() {
   const [dietType, setDietType] = useState("");
   const [budget, setBudget] = useState("");
-
   const [dietPlan, setDietPlan] = useState("");
-
-  const [history, setHistory] = useState([]);
-
   const [loading, setLoading] = useState(false);
 
-  const fetchHistory = async () => {
-    try {
-      const token = localStorage.getItem("token");
-
-      const res = await API.get(
-        "/diet/history",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-
-      setHistory(res.data);
-    } catch (error) {
-      console.log(error);
-    }
-  };
-
-  useEffect(() => {
-    fetchHistory();
-  }, []);
+  const navigate = useNavigate();
 
   const generateDietPlan = async () => {
     try {
@@ -54,8 +30,6 @@ function DietPlan() {
       );
 
       setDietPlan(res.data.plan.plan);
-
-      fetchHistory();
     } catch (error) {
       console.log(error);
       alert("Failed to generate diet plan");
@@ -66,11 +40,13 @@ function DietPlan() {
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
+
       <h1 className="text-4xl font-bold mb-6">
         AI Diet Planner 🍎
       </h1>
 
       <div className="bg-white p-6 rounded-xl shadow mb-6">
+
         <div className="mb-4">
           <label className="block mb-2">
             Diet Type
@@ -101,7 +77,7 @@ function DietPlan() {
           </select>
         </div>
 
-        <div className="mb-4">
+        <div className="mb-6">
           <label className="block mb-2">
             Monthly Budget
           </label>
@@ -117,19 +93,33 @@ function DietPlan() {
           />
         </div>
 
-        <button
-          onClick={generateDietPlan}
-          disabled={loading}
-          className="bg-green-600 text-white px-6 py-3 rounded"
-        >
-          {loading
-            ? "Generating..."
-            : "Generate Diet Plan"}
-        </button>
+        <div className="flex gap-4">
+
+          <button
+            onClick={generateDietPlan}
+            disabled={loading}
+            className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded-lg"
+          >
+            {loading
+              ? "Generating..."
+              : "Generate Diet Plan"}
+          </button>
+
+          <button
+            onClick={() =>
+              navigate("/diet-history")
+            }
+            className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg"
+          >
+            View Diet History 📚
+          </button>
+
+        </div>
+
       </div>
 
       {dietPlan && (
-        <div className="bg-white p-6 rounded-xl shadow mb-8">
+        <div className="bg-white p-6 rounded-xl shadow">
           <h2 className="text-2xl font-bold mb-4">
             Latest Diet Plan
           </h2>
@@ -140,28 +130,6 @@ function DietPlan() {
         </div>
       )}
 
-      <div>
-        <h2 className="text-2xl font-bold mb-4">
-          Diet History
-        </h2>
-
-        {history.map((plan) => (
-          <div
-            key={plan._id}
-            className="bg-white p-6 rounded-xl shadow mb-4"
-          >
-            <div className="text-sm text-gray-500 mb-2">
-              {new Date(
-                plan.createdAt
-              ).toLocaleString()}
-            </div>
-
-            <pre className="whitespace-pre-wrap">
-              {plan.plan}
-            </pre>
-          </div>
-        ))}
-      </div>
     </div>
   );
 }

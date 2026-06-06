@@ -13,6 +13,7 @@ const dietRoutes = require("./routes/dietRoutes");
 const chatRoutes = require("./routes/chatRoutes");
 const progressRoutes = require("./routes/progressRoutes");
 const reportRoutes = require("./routes/reportRoutes");
+const workoutRoutes = require("./routes/workoutRoutes");
 
 const protect = require("./middleware/auth");
 
@@ -37,6 +38,7 @@ app.use("/api/diet", dietRoutes);
 app.use("/api/chat", chatRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/report", reportRoutes);
+app.use("/api/workout", workoutRoutes);
 
 app.get("/", (req, res) => {
   res.send("FitFlow API Running...");
