@@ -17,6 +17,7 @@ function Progress() {
   const [range, setRange] = useState("7d");
   const [user, setUser] = useState(null);
   const [streak, setStreak] = useState(0);
+  const [badges, setBadges] = useState([]);
 
   const fetchProgress = async () => {
     try {
@@ -60,6 +61,22 @@ function Progress() {
 setStreak(
   streakRes.data
     .currentStreak
+);
+
+//Badges
+const badgeRes =
+  await API.get(
+    "/progress/badges",
+    {
+      headers: {
+        Authorization:
+          `Bearer ${token}`,
+      },
+    }
+  );
+
+setBadges(
+  badgeRes.data
 );
   };
 
@@ -279,6 +296,35 @@ setStreak(
           </div>
         </div>
       </div>
+
+      <div className="bg-white p-6 rounded-xl shadow mb-6">
+  <h2 className="text-2xl font-bold mb-4">
+    Achievements 🏆
+  </h2>
+
+  {badges.length > 0 ? (
+    <div className="flex flex-wrap gap-3">
+      {badges.map(
+        (
+          badge,
+          index
+        ) => (
+          <div
+            key={index}
+            className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-semibold"
+          >
+            {badge}
+          </div>
+        )
+      )}
+    </div>
+  ) : (
+    <p>
+      No achievements unlocked
+      yet.
+    </p>
+  )}
+</div>
 
       {/* Weight Chart */}
       <div className="bg-white p-6 rounded-xl shadow">

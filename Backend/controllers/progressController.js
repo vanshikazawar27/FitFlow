@@ -2,7 +2,8 @@ const Progress = require("../models/Progress")
 const {
   calculateCurrentStreak,
   calculateLongestStreak,
-} = require("../utils/streakCalculator");;
+} = require("../utils/streakCalculator");
+const calculateBadges = require("../utils/badgeCalculator");
 
 const addProgress = async (
   req,
@@ -133,8 +134,50 @@ const getStreak = async (
   }
 };
 
+const getBadges = async (
+  req,
+  res
+) => {
+  try {
+    const progress =
+      await Progress.find({
+        user: req.user.id,
+      }).sort({
+        createdAt: 1,
+      });
+
+    const user =
+      await User.findById(
+        req.user.id
+      );
+
+    const streak =
+      progress.length;
+
+    const goalReached =
+      user.goalWeight &&
+      user.weight <=
+        user.goalWeight;
+
+    const badges =
+      calculateBadges(
+        progress,
+        streak,
+        goalReached
+      );
+
+    res.json(badges);
+  } catch (error) {
+    res.status(500).json({
+      message:
+        error.message,
+    });
+  }
+};
+
 module.exports = {
   addProgress,
   getProgress,
   getStreak,
+  getBadges,
 };

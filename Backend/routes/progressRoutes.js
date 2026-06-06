@@ -4,6 +4,7 @@ const {
   addProgress,
   getProgress,
   getStreak,
+  getBadges,
 } = require(
   "../controllers/progressController"
 );
@@ -30,6 +31,12 @@ router.get(
   "/streak",
   protect,
   getStreak
+);
+
+router.get(
+  "/badges",
+  protect,
+  getBadges
 );
 
 
