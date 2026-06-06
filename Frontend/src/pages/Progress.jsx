@@ -1,5 +1,7 @@
 import { useEffect, useState } from "react";
 import API from "../services/api";
+import { CircularProgressbar } from "react-circular-progressbar";
+import "react-circular-progressbar/dist/styles.css";
 
 import {
   LineChart,
@@ -44,40 +46,33 @@ function Progress() {
       );
 
       setUser(profileRes.data);
+
+      const streakRes = await API.get(
+        "/progress/streak",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setStreak(
+        streakRes.data.currentStreak || 0
+      );
+
+      const badgeRes = await API.get(
+        "/progress/badges",
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
+
+      setBadges(badgeRes.data || []);
     } catch (error) {
       console.log(error);
     }
-    const streakRes =
-  await API.get(
-    "/progress/streak",
-    {
-      headers: {
-        Authorization:
-          `Bearer ${token}`,
-      },
-    }
-  );
-
-setStreak(
-  streakRes.data
-    .currentStreak
-);
-
-//Badges
-const badgeRes =
-  await API.get(
-    "/progress/badges",
-    {
-      headers: {
-        Authorization:
-          `Bearer ${token}`,
-      },
-    }
-  );
-
-setBadges(
-  badgeRes.data
-);
   };
 
   useEffect(() => {
@@ -90,9 +85,7 @@ setBadges(
 
       await API.post(
         "/progress",
-        {
-          weight,
-        },
+        { weight },
         {
           headers: {
             Authorization: `Bearer ${token}`,
@@ -124,11 +117,11 @@ setBadges(
       ? data[0].weight
       : 0;
 
+  const totalEntries = data.length;
+
   const weightChange = (
     startingWeight - currentWeight
   ).toFixed(1);
-
-  const totalEntries = data.length;
 
   const goalWeight =
     user?.goalWeight || 0;
@@ -155,20 +148,63 @@ setBadges(
     );
   }
 
+  let fitnessScore = 0;
+
+  if (
+    user?.height &&
+    currentWeight
+  ) {
+    const bmi =
+      currentWeight /
+      Math.pow(
+        user.height / 100,
+        2
+      );
+
+    if (
+      bmi >= 18.5 &&
+      bmi <= 24.9
+    ) {
+      fitnessScore += 30;
+    } else if (
+      bmi >= 17 &&
+      bmi <= 29
+    ) {
+      fitnessScore += 20;
+    } else {
+      fitnessScore += 10;
+    }
+  }
+
+  fitnessScore += Math.min(
+    progressPercent * 0.4,
+    40
+  );
+
+  fitnessScore += Math.min(
+    totalEntries * 2,
+    30
+  );
+
+  fitnessScore =
+    Math.round(fitnessScore);
+
   return (
     <div className="min-h-screen bg-gray-100 p-8">
       <h1 className="text-4xl font-bold mb-6">
         Progress Tracker 📈
       </h1>
 
-      {/* Add Weight */}
+      {/* Weight Entry */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">
         <input
           type="number"
           placeholder="Current Weight"
           value={weight}
           onChange={(e) =>
-            setWeight(e.target.value)
+            setWeight(
+              e.target.value
+            )
           }
           className="border p-3 rounded mr-4"
         />
@@ -190,7 +226,9 @@ setBadges(
         <select
           value={range}
           onChange={(e) =>
-            setRange(e.target.value)
+            setRange(
+              e.target.value
+            )
           }
           className="border p-2 rounded-lg"
         >
@@ -222,7 +260,6 @@ setBadges(
 
       {/* Summary Cards */}
       <div className="grid md:grid-cols-4 gap-6 mb-6">
-
         <div className="bg-white p-6 rounded-xl shadow">
           <h3 className="text-gray-500">
             Current Weight
@@ -268,7 +305,43 @@ setBadges(
             {totalEntries}
           </p>
         </div>
+      </div>
 
+      {/* Fitness Score */}
+      <div className="bg-white p-6 rounded-xl shadow mb-6">
+        <h2 className="text-2xl font-bold mb-4">
+          Fitness Score 🏆
+        </h2>
+
+        <div className="flex items-center gap-8">
+          <div
+            style={{
+              width: 120,
+              height: 120,
+            }}
+          >
+            <CircularProgressbar
+              value={fitnessScore}
+              text={`${fitnessScore}`}
+            />
+          </div>
+
+          <div>
+            <p className="text-2xl font-bold">
+              {fitnessScore >= 80
+                ? "Excellent 🔥"
+                : fitnessScore >= 60
+                ? "Good 💪"
+                : "Needs Improvement ⚡"}
+            </p>
+
+            <p className="text-gray-500 mt-2">
+              Based on BMI,
+              goal progress and
+              consistency.
+            </p>
+          </div>
+        </div>
       </div>
 
       {/* Goal Progress */}
@@ -297,37 +370,38 @@ setBadges(
         </div>
       </div>
 
+      {/* Achievements */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">
-  <h2 className="text-2xl font-bold mb-4">
-    Achievements 🏆
-  </h2>
+        <h2 className="text-2xl font-bold mb-4">
+          Achievements 🏆
+        </h2>
 
-  {badges.length > 0 ? (
-    <div className="flex flex-wrap gap-3">
-      {badges.map(
-        (
-          badge,
-          index
-        ) => (
-          <div
-            key={index}
-            className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-semibold"
-          >
-            {badge}
+        {badges.length > 0 ? (
+          <div className="flex flex-wrap gap-3">
+            {badges.map(
+              (
+                badge,
+                index
+              ) => (
+                <div
+                  key={index}
+                  className="bg-yellow-100 text-yellow-800 px-4 py-2 rounded-full font-semibold"
+                >
+                  {badge}
+                </div>
+              )
+            )}
           </div>
-        )
-      )}
-    </div>
-  ) : (
-    <p>
-      No achievements unlocked
-      yet.
-    </p>
-  )}
-</div>
+        ) : (
+          <p>
+            No achievements
+            unlocked yet.
+          </p>
+        )}
+      </div>
 
-      {/* Weight Chart */}
-      <div className="bg-white p-6 rounded-xl shadow">
+      {/* Chart */}
+      <div className="bg-white p-6 rounded-xl shadow mb-6">
         <h2 className="text-2xl font-bold mb-4">
           Weight Progress
         </h2>
@@ -355,15 +429,16 @@ setBadges(
         </ResponsiveContainer>
       </div>
 
+      {/* Streak */}
       <div className="bg-white p-6 rounded-xl shadow">
-  <h3 className="text-gray-500">
-    Current Streak
-  </h3>
+        <h3 className="text-gray-500">
+          Current Streak
+        </h3>
 
-  <p className="text-3xl font-bold text-red-600">
-    🔥 {streak}
-  </p>
-</div>
+        <p className="text-3xl font-bold text-red-600">
+          🔥 {streak} Days
+        </p>
+      </div>
     </div>
   );
 }
