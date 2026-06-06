@@ -118,6 +118,21 @@ function Progress() {
       : 0;
 
   const totalEntries = data.length;
+  
+  const averageWeightLossPerEntry =
+  totalEntries > 1
+    ? (
+        (startingWeight -
+          currentWeight) /
+        totalEntries
+      ).toFixed(2)
+    : 0;
+
+const predictedWeight30Days =
+  (
+    currentWeight -
+    averageWeightLossPerEntry * 4
+  ).toFixed(1);
 
   const weightChange = (
     startingWeight - currentWeight
@@ -343,6 +358,113 @@ function Progress() {
           </div>
         </div>
       </div>
+
+      <div className="grid md:grid-cols-4 gap-6 mb-6">
+
+  <div className="bg-white p-6 rounded-xl shadow">
+    <h3 className="text-gray-500">
+      BMI
+    </h3>
+
+    <p className="text-3xl font-bold text-blue-600">
+      {user?.height && currentWeight
+        ? (
+            currentWeight /
+            Math.pow(
+              user.height / 100,
+              2
+            )
+          ).toFixed(1)
+        : "--"}
+    </p>
+  </div>
+
+  <div className="bg-white p-6 rounded-xl shadow">
+    <h3 className="text-gray-500">
+      Goal Remaining
+    </h3>
+
+    <p className="text-3xl font-bold text-green-600">
+      {goalWeight
+        ? Math.abs(
+            currentWeight -
+              goalWeight
+          ).toFixed(1)
+        : "--"}{" "}
+      kg
+    </p>
+  </div>
+
+  <div className="bg-white p-6 rounded-xl shadow">
+    <h3 className="text-gray-500">
+      Success Rate
+    </h3>
+
+    <p className="text-3xl font-bold text-purple-600">
+      {progressPercent}%
+    </p>
+  </div>
+
+  <div className="bg-white p-6 rounded-xl shadow">
+    <h3 className="text-gray-500">
+      Consistency
+    </h3>
+
+    <p className="text-3xl font-bold text-orange-600">
+      {Math.min(
+        totalEntries * 5,
+        100
+      )}
+      %
+    </p>
+  </div>
+</div>
+
+     <div className="bg-white p-6 rounded-xl shadow mb-6">
+
+  <h2 className="text-2xl font-bold mb-4">
+    AI Weight Prediction 🔮
+  </h2>
+
+  <div className="grid md:grid-cols-3 gap-6">
+
+    <div>
+      <p className="text-gray-500">
+        Current Weight
+      </p>
+
+      <p className="text-3xl font-bold text-blue-600">
+        {currentWeight} kg
+      </p>
+    </div>
+
+    <div>
+      <p className="text-gray-500">
+        Avg. Change
+      </p>
+
+      <p className="text-3xl font-bold text-purple-600">
+        {averageWeightLossPerEntry} kg
+      </p>
+    </div>
+
+    <div>
+      <p className="text-gray-500">
+        Predicted (30 Days)
+      </p>
+
+      <p className="text-3xl font-bold text-green-600">
+        {predictedWeight30Days} kg
+      </p>
+    </div>
+
+  </div>
+
+  <p className="mt-4 text-gray-500">
+    Based on your historical progress trend.
+  </p>
+
+</div>
 
       {/* Goal Progress */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">
