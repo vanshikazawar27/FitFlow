@@ -20,22 +20,29 @@ const generateDietPlan = async (
     );
 
     const prompt = `
-Generate a healthy diet plan.
+Create a personalized diet plan.
 
-Goal: ${user.goal}
-Weight: ${user.weight}
-Height: ${user.height}
+User Details:
+
+Weight: ${user?.weight} kg
+Height: ${user?.height} cm
+Age: ${user?.age}
 
 Diet Type: ${dietType}
-Budget: ${budget}
+Monthly Budget: ₹${budget}
 
-Include:
+Provide:
 
-Breakfast
-Lunch
-Dinner
-Calories
-Protein
+1. Breakfast
+2. Lunch
+3. Dinner
+4. Snacks
+5. Daily protein intake
+6. Daily calories
+7. Budget-friendly food suggestions
+8. Health tips
+
+Format properly.
 `;
 
     const completion =

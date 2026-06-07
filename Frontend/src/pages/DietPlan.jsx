@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
 import { useNavigate } from "react-router-dom";
 
@@ -37,6 +37,24 @@ function DietPlan() {
       setLoading(false);
     }
   };
+
+const calculateCalories = () => {
+  if (!weight || !height || !age) {
+    alert("Please fill all fields");
+    return;
+  }
+
+  const bmr =
+    10 * Number(weight) +
+    6.25 * Number(height) -
+    5 * Number(age) +
+    5;
+
+  const maintenanceCalories =
+    Math.round(bmr * 1.55);
+
+  setCalories(maintenanceCalories);
+};
 
   return (
     <div className="min-h-screen bg-gray-100 p-8">
