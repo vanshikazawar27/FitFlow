@@ -35,14 +35,15 @@ Provide:
 
 1. Breakfast
 2. Lunch
-3. Dinner
-4. Snacks
+3.Evening snack
+4. Dinner
 5. Daily protein intake
-6. Daily calories
-7. Budget-friendly food suggestions
+6. Daily calorie intake
+7. Hydration recommendations
+7. Budget-friendly alternatives
 8. Health tips
 
-Format properly.
+Format clearly with headings.
 `;
 
     const completion =
