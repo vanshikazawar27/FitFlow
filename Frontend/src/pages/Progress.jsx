@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import API from "../services/api";
 import { CircularProgressbar } from "react-circular-progressbar";
 import "react-circular-progressbar/dist/styles.css";
-import { Link } from "react-router-dom";
+//import { Link } from "react-router-dom";
 
 import {
   LineChart,
@@ -21,7 +21,7 @@ const [range, setRange] = useState("7d");
 const [user, setUser] = useState(null);
 const [streak, setStreak] = useState(0);
 const [badges, setBadges] = useState([]);
-const [photos, setPhotos] = useState([]);
+//const [photos, setPhotos] = useState([]);
 
 
   const fetchProgress = async () => {
@@ -79,8 +79,8 @@ const [photos, setPhotos] = useState([]);
   setBadges([]);
 }
 //       try {
-//   const photoRes = await API.get(
-//     "/progress-photos",
+  // const photoRes = await API.get(
+  //   "/progress-photos")
 //     {
 //       headers: {
 //         Authorization: `Bearer ${token}`,
@@ -544,7 +544,7 @@ const predictedWeight30Days =
         )}
       </div>
 
-  {/* progress photos */}
+  {/* progress photos
   <div className="bg-white p-6 rounded-xl shadow mb-6">
 
   <div className="flex justify-between items-center mb-4">
@@ -579,7 +579,7 @@ const predictedWeight30Days =
   )}
 </div>
 
-</div>
+</div> */}
 
       {/* Chart */}
       <div className="bg-white p-6 rounded-xl shadow mb-6">

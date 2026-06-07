@@ -30,12 +30,6 @@ const app = express();
 // Middleware
 app.use(cors());
 app.use(express.json());
-// app.use(
-//   "/uploads",
-//   express.static(
-//     "uploads"
-//   )
-// );
 
 // Routes
 app.use("/api/auth", authRoutes);
@@ -46,12 +40,22 @@ app.use("/api/chat", chatRoutes);
 app.use("/api/progress", progressRoutes);
 app.use("/api/report", reportRoutes);
 app.use("/api/workout", workoutRoutes);
-//app.use("/api/photos", progressPhotoRoutes);
+app.use("/api/progress", progressRoutes);
+//app.use("/api/progress-photos", progressPhotoRoutes);
 
 
 app.get("/", (req, res) => {
   res.send("FitFlow API Running...");
 });
+
+const path = require("path");
+
+app.use(
+  "/uploads",
+  express.static(
+    path.join(__dirname, "uploads")
+  )
+);
 
 // Protected Route Test
 app.get(
