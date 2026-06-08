@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import API from "../services/api";
 
 function Profile() {
@@ -12,6 +12,36 @@ function Profile() {
     experience: "",
     daysPerWeek: "",
   });
+  const [loading, setLoading] = useState(false);
+
+  useEffect(() => {
+    const fetchCurrentProfile = async () => {
+      try {
+        const token = localStorage.getItem("token");
+        if (!token) return;
+        const res = await API.get("/user/profile", {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        });
+        if (res.data) {
+          setFormData({
+            age: res.data.age || "",
+            gender: res.data.gender || "",
+            height: res.data.height || "",
+            weight: res.data.weight || "",
+            goal: res.data.goal || "",
+            goalWeight: res.data.goalWeight || "",
+            experience: res.data.experience || "",
+            daysPerWeek: res.data.daysPerWeek || "",
+          });
+        }
+      } catch (err) {
+        console.log("Failed to load user profile in editing form", err);
+      }
+    };
+    fetchCurrentProfile();
+  }, []);
 
   const handleChange = (e) => {
     setFormData({
@@ -22,12 +52,12 @@ function Profile() {
 
   const handleSubmit = async (e) => {
     e.preventDefault();
+    setLoading(true);
 
     try {
-      const token =
-        localStorage.getItem("token");
+      const token = localStorage.getItem("token");
 
-      const res = await API.put(
+      await API.put(
         "/user/profile",
         formData,
         {
@@ -37,143 +67,165 @@ function Profile() {
         }
       );
 
-      alert("Profile Updated");
-
-      console.log(res.data);
+      alert("Profile Updated Successfully!");
     } catch (error) {
       console.log(error);
       alert("Error updating profile");
+    } finally {
+      setLoading(false);
     }
   };
 
   return (
-    <div className="min-h-screen flex justify-center items-center bg-gray-100">
-      <form
-        onSubmit={handleSubmit}
-        className="bg-white p-8 shadow-lg rounded-lg w-[450px]"
-      >
-        <h2 className="text-3xl font-bold mb-6 text-center">
-          Complete Your Profile
-        </h2>
+    <div className="max-w-4xl mx-auto space-y-8 animate-[fadeIn_0.4s_ease-out]">
+      {/* Title Header */}
+      <div className="border-b border-slate-800 pb-4">
+        <h1 className="text-4xl font-extrabold text-white font-sans">Complete Your Profile 👤</h1>
+        <p className="text-slate-400 mt-1">Fine-tune your anatomical and scheduling constraints to optimize AI generations.</p>
+      </div>
 
-        <input
-          type="number"
-          name="age"
-          placeholder="Age"
-          value={formData.age}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        />
+      <form onSubmit={handleSubmit} className="bg-[#0F172A]/80 border border-slate-800 rounded-3xl p-6 md:p-10 shadow-xl space-y-8">
+        
+        {/* Anatomical Parameters Group */}
+        <div>
+          <h3 className="text-lg font-bold text-white mb-4 border-l-2 border-[#A3E635] pl-3">Anatomical Parameters</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Age (years)</label>
+              <input
+                type="number"
+                name="age"
+                placeholder="e.g. 26"
+                value={formData.age}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                required
+              />
+            </div>
 
-        <select
-          name="gender"
-          value={formData.gender}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        >
-          <option value="">
-            Select Gender
-          </option>
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Gender</label>
+              <select
+                name="gender"
+                value={formData.gender}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3.5 rounded-xl outline-none transition-all duration-200 cursor-pointer"
+                required
+              >
+                <option value="">Select Gender</option>
+                <option value="Male">Male</option>
+                <option value="Female">Female</option>
+              </select>
+            </div>
 
-          <option value="Male">
-            Male
-          </option>
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Height (cm)</label>
+              <input
+                type="number"
+                name="height"
+                placeholder="e.g. 175"
+                value={formData.height}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                required
+              />
+            </div>
 
-          <option value="Female">
-            Female
-          </option>
-        </select>
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Current Weight (kg)</label>
+              <input
+                type="number"
+                name="weight"
+                placeholder="e.g. 74"
+                value={formData.weight}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                required
+              />
+            </div>
+          </div>
+        </div>
 
-        <input
-          type="number"
-          name="height"
-          placeholder="Height (cm)"
-          value={formData.height}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        />
+        {/* Goals & Schedules Group */}
+        <div>
+          <h3 className="text-lg font-bold text-white mb-4 border-l-2 border-[#06B6D4] pl-3">Goals & Routines</h3>
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Target Goal</label>
+              <select
+                name="goal"
+                value={formData.goal}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3.5 rounded-xl outline-none transition-all duration-200 cursor-pointer"
+                required
+              >
+                <option value="">Select Goal</option>
+                <option value="Weight Loss">Weight Loss</option>
+                <option value="Muscle Gain">Muscle Gain</option>
+                <option value="Maintain Weight">Maintain Weight</option>
+              </select>
+            </div>
 
-        <input
-          type="number"
-          name="weight"
-          placeholder="Current Weight (kg)"
-          value={formData.weight}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        />
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Target Weight (kg)</label>
+              <input
+                type="number"
+                name="goalWeight"
+                placeholder="e.g. 68"
+                value={formData.goalWeight}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                required
+              />
+            </div>
 
-        <select
-          name="goal"
-          value={formData.goal}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        >
-          <option value="">
-            Select Goal
-          </option>
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Experience level</label>
+              <select
+                name="experience"
+                value={formData.experience}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3.5 rounded-xl outline-none transition-all duration-200 cursor-pointer"
+                required
+              >
+                <option value="">Select Experience</option>
+                <option value="Beginner">Beginner</option>
+                <option value="Intermediate">Intermediate</option>
+                <option value="Advanced">Advanced</option>
+              </select>
+            </div>
 
-          <option value="Weight Loss">
-            Weight Loss
-          </option>
+            <div>
+              <label className="block text-slate-300 text-sm font-semibold mb-2">Workout Days Per Week</label>
+              <input
+                type="number"
+                name="daysPerWeek"
+                placeholder="e.g. 4"
+                value={formData.daysPerWeek}
+                onChange={handleChange}
+                className="w-full bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-4 py-3 rounded-xl outline-none transition-all duration-200"
+                required
+              />
+            </div>
+          </div>
+        </div>
 
-          <option value="Muscle Gain">
-            Muscle Gain
-          </option>
-
-          <option value="Maintain Weight">
-            Maintain Weight
-          </option>
-        </select>
-
-        {/* NEW GOAL WEIGHT FIELD */}
-
-        <input
-          type="number"
-          name="goalWeight"
-          placeholder="Goal Weight (kg)"
-          value={formData.goalWeight}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        />
-
-        <select
-          name="experience"
-          value={formData.experience}
-          onChange={handleChange}
-          className="border p-2 w-full mb-3 rounded"
-        >
-          <option value="">
-            Select Experience
-          </option>
-
-          <option value="Beginner">
-            Beginner
-          </option>
-
-          <option value="Intermediate">
-            Intermediate
-          </option>
-
-          <option value="Advanced">
-            Advanced
-          </option>
-        </select>
-
-        <input
-          type="number"
-          name="daysPerWeek"
-          placeholder="Workout Days Per Week"
-          value={formData.daysPerWeek}
-          onChange={handleChange}
-          className="border p-2 w-full mb-4 rounded"
-        />
-
+        {/* Submit */}
         <button
           type="submit"
-          className="bg-blue-600 hover:bg-blue-700 text-white w-full py-3 rounded-lg"
+          disabled={loading}
+          className="w-full bg-[#A3E635] hover:bg-[#bbf055] text-slate-950 font-extrabold py-4 rounded-xl shadow-[0_4px_20px_rgba(163,230,53,0.25)] transition-all duration-200 hover:scale-[1.01] active:scale-[0.99] flex items-center justify-center gap-2"
         >
-          Save Profile
+          {loading ? (
+            <>
+              <span className="w-4 h-4 border-2 border-slate-950 border-t-transparent rounded-full animate-spin" />
+              Saving Profile...
+            </>
+          ) : (
+            "Save Profile Configuration"
+          )}
         </button>
+
       </form>
     </div>
   );

@@ -11,6 +11,7 @@ import FitnessChat from "./pages/FitnessChat";
 import Progress from "./pages/Progress";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import DietHistory from "./pages/DietHistory";
+import MainLayout from "./components/MainLayout";
 
 function App() {
   return (
@@ -34,7 +35,9 @@ function App() {
         path="/dashboard"
         element={
           <ProtectedRoute>
-            <Dashboard />
+            <MainLayout>
+              <Dashboard />
+            </MainLayout>
           </ProtectedRoute>
         }
       />
@@ -42,33 +45,71 @@ function App() {
          path="/profile"
          element={
          <ProtectedRoute>
-            <Profile />
+            <MainLayout>
+              <Profile />
+            </MainLayout>
          </ProtectedRoute>
          }
        />
        <Route
           path="/workout-plan"
-          element={<WorkoutPlan />}
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <WorkoutPlan />
+              </MainLayout>
+            </ProtectedRoute>
+          }
         />
         <Route
         path="/diet-plan"
-        element={<DietPlan />}
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <DietPlan />
+            </MainLayout>
+          </ProtectedRoute>
+        }
         />
         <Route
         path="/fitness-chat"
-        element={<FitnessChat />}
+        element={
+          <ProtectedRoute>
+            <MainLayout>
+              <FitnessChat />
+            </MainLayout>
+          </ProtectedRoute>
+        }
         />
         <Route
           path="/progress"
-          element={<Progress />}
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <Progress />
+              </MainLayout>
+            </ProtectedRoute>
+          }
          />
          <Route
           path="/workout-history"
-          element={<WorkoutHistory />}
+          element={
+            <ProtectedRoute>
+              <MainLayout>
+                <WorkoutHistory />
+              </MainLayout>
+            </ProtectedRoute>
+          }
           />
           <Route
            path="/diet-history"
-           element={<DietHistory />}
+           element={
+             <ProtectedRoute>
+               <MainLayout>
+                 <DietHistory />
+               </MainLayout>
+             </ProtectedRoute>
+           }
           />
     </Routes>
     

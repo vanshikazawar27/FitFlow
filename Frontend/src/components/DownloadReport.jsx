@@ -45,9 +45,9 @@ function DownloadReport() {
   return (
     <button
       onClick={downloadReport}
-      className="bg-red-600 text-white px-6 py-3 rounded-lg"
+      className="bg-[#1E293B] hover:bg-slate-800 text-white border border-slate-700 hover:border-[#A3E635] px-6 py-3 rounded-xl font-bold transition-all duration-200 flex items-center gap-2 shadow-md"
     >
-      Download PDF Report 📄
+      <span>📄</span> Download Report
     </button>
   );
 }
