@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import API from "../services/api";
+import AnimatedButton from "./AnimatedButton";
 
 function MainLayout({ children }) {
   const [user, setUser] = useState(null);
@@ -95,12 +95,12 @@ function MainLayout({ children }) {
               </div>
             </div>
           )}
-          <button
+          <AnimatedButton
             onClick={handleLogout}
             className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900/40 text-red-400 hover:text-red-300 font-medium transition-colors duration-200 border border-red-900/30"
           >
-            <span>🚪</span> Logout
-          </button>
+            <span>🚪 Logout</span>
+          </AnimatedButton>
         </div>
       </aside>
 

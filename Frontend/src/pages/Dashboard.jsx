@@ -1,7 +1,10 @@
 import { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import API from "../services/api";
+
+
 import DownloadReport from "../components/DownloadReport";
+import AnimatedCard from "../components/AnimatedCard";
 
 import {
   calculateBMI,
@@ -74,7 +77,7 @@ function Dashboard() {
       {/* Main Stats Grid */}
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
         {/* BMI Card */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
+        <AnimatedCard className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-400 text-sm font-semibold">Body Mass Index</span>
             <span className="text-2xl">⚖️</span>
@@ -86,10 +89,10 @@ function Dashboard() {
           <div className="mt-4 w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
             <div className="bg-[#06B6D4] h-1.5 rounded-full" style={{ width: `${bmiPercent}%` }} />
           </div>
-        </div>
+        </AnimatedCard>
 
         {/* Current Weight Card */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
+        <AnimatedCard className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-400 text-sm font-semibold">Current Weight</span>
             <span className="text-2xl">⚖️</span>
@@ -101,10 +104,10 @@ function Dashboard() {
           <div className="mt-4 w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
             <div className="bg-[#A3E635] h-1.5 rounded-full" style={{ width: "65%" }} />
           </div>
-        </div>
+        </AnimatedCard>
 
         {/* Frequency & Experience */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
+        <AnimatedCard className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-400 text-sm font-semibold">Weekly Target</span>
             <span className="text-2xl">📅</span>
@@ -116,10 +119,10 @@ function Dashboard() {
           <div className="mt-4 w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
             <div className="bg-purple-500 h-1.5 rounded-full" style={{ width: `${((user.daysPerWeek || 0) / 7) * 100}%` }} />
           </div>
-        </div>
+        </AnimatedCard>
 
         {/* Age & Height Card */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
+        <AnimatedCard className="bg-[#0F172A]/80 border border-slate-800 rounded-2xl p-6 hover:border-slate-700 transition-all duration-200 shadow-md">
           <div className="flex justify-between items-start mb-4">
             <span className="text-slate-400 text-sm font-semibold">Physical Profile</span>
             <span className="text-2xl">👤</span>
@@ -131,7 +134,7 @@ function Dashboard() {
           <div className="mt-4 w-full bg-slate-800 rounded-full h-1.5 overflow-hidden">
             <div className="bg-slate-700 h-1.5 rounded-full" style={{ width: "100%" }} />
           </div>
-        </div>
+        </AnimatedCard>
       </div>
 
       {/* Interactive Feature Cards */}
@@ -140,7 +143,7 @@ function Dashboard() {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
           
           {/* Workouts Card */}
-          <div className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-[#06B6D4]/30 hover:bg-[#06B6D4]/5 transition-all duration-300 flex flex-col justify-between group">
+          <AnimatedCard className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-[#06B6D4]/30 hover:bg-[#06B6D4]/5 transition-all duration-300 flex flex-col justify-between group">
             <div>
               <span className="text-3xl block mb-4">🏋️‍♂️</span>
               <h4 className="text-lg font-bold text-white group-hover:text-[#06B6D4] transition-colors">AI Workout Generator</h4>
@@ -154,10 +157,10 @@ function Dashboard() {
             >
               Get Workout Plan
             </button>
-          </div>
+          </AnimatedCard>
 
           {/* Diet Card */}
-          <div className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-[#A3E635]/30 hover:bg-[#A3E635]/5 transition-all duration-300 flex flex-col justify-between group">
+          <AnimatedCard className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-[#A3E635]/30 hover:bg-[#A3E635]/5 transition-all duration-300 flex flex-col justify-between group">
             <div>
               <span className="text-3xl block mb-4">🥗</span>
               <h4 className="text-lg font-bold text-white group-hover:text-[#A3E635] transition-colors">AI Diet Planner</h4>
@@ -171,10 +174,10 @@ function Dashboard() {
             >
               Get Diet Plan
             </button>
-          </div>
+          </AnimatedCard>
 
           {/* Chat Card */}
-          <div className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-indigo-550/5 transition-all duration-300 flex flex-col justify-between group">
+          <AnimatedCard className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-indigo-500/30 hover:bg-indigo-550/5 transition-all duration-300 flex flex-col justify-between group">
             <div>
               <span className="text-3xl block mb-4">🤖</span>
               <h4 className="text-lg font-bold text-white group-hover:text-indigo-400 transition-colors">AI Fitness Coach</h4>
@@ -188,10 +191,10 @@ function Dashboard() {
             >
               Chat With Coach
             </button>
-          </div>
+          </AnimatedCard>
 
           {/* Progress Card */}
-          <div className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/30 hover:bg-emerald-550/5 transition-all duration-300 flex flex-col justify-between group">
+          <AnimatedCard className="bg-[#0F172A]/50 border border-slate-800 rounded-2xl p-6 hover:border-emerald-500/30 hover:bg-emerald-550/5 transition-all duration-300 flex flex-col justify-between group">
             <div>
               <span className="text-3xl block mb-4">📈</span>
               <h4 className="text-lg font-bold text-white group-hover:text-emerald-400 transition-colors">Progress Tracker</h4>
@@ -205,7 +208,7 @@ function Dashboard() {
             >
               Analyze Progress
             </button>
-          </div>
+          </AnimatedCard>
 
         </div>
       </div>

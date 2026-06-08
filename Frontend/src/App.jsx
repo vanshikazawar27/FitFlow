@@ -12,10 +12,12 @@ import Progress from "./pages/Progress";
 import WorkoutHistory from "./pages/WorkoutHistory";
 import DietHistory from "./pages/DietHistory";
 import MainLayout from "./components/MainLayout";
+import { AnimatePresence } from "framer-motion";
+import AnimatedPage from "./components/AnimatedPage";
 
 function App() {
   return (
-    <Routes>
+    <AnimatePresence mode="wait"><Routes>
       <Route
         path="/"
         element={<Navigate to="/login" />}
@@ -23,40 +25,40 @@ function App() {
 
       <Route
         path="/signup"
-        element={<Signup />}
+        element={<AnimatedPage><Signup /></AnimatedPage>}
       />
 
       <Route
         path="/login"
-        element={<Login />}
+        element={<AnimatedPage><Login /></AnimatedPage>}
       />
 
       <Route
         path="/dashboard"
         element={
-          <ProtectedRoute>
-            <MainLayout>
-              <Dashboard />
-            </MainLayout>
-          </ProtectedRoute>
-        }
+            <ProtectedRoute>
+              <MainLayout>
+                <AnimatedPage><Dashboard /></AnimatedPage>
+              </MainLayout>
+            </ProtectedRoute>
+          }
       />
       <Route
          path="/profile"
          element={
-         <ProtectedRoute>
-            <MainLayout>
-              <Profile />
-            </MainLayout>
-         </ProtectedRoute>
-         }
+          <ProtectedRoute>
+             <MainLayout>
+               <AnimatedPage><Profile /></AnimatedPage>
+             </MainLayout>
+          </ProtectedRoute>
+          }
        />
        <Route
           path="/workout-plan"
           element={
             <ProtectedRoute>
               <MainLayout>
-                <WorkoutPlan />
+                <AnimatedPage><WorkoutPlan /></AnimatedPage>
               </MainLayout>
             </ProtectedRoute>
           }
@@ -64,29 +66,29 @@ function App() {
         <Route
         path="/diet-plan"
         element={
-          <ProtectedRoute>
-            <MainLayout>
-              <DietPlan />
-            </MainLayout>
-          </ProtectedRoute>
-        }
+            <ProtectedRoute>
+              <MainLayout>
+                <AnimatedPage><DietPlan /></AnimatedPage>
+              </MainLayout>
+            </ProtectedRoute>
+          }
         />
         <Route
         path="/fitness-chat"
         element={
-          <ProtectedRoute>
-            <MainLayout>
-              <FitnessChat />
-            </MainLayout>
-          </ProtectedRoute>
-        }
+            <ProtectedRoute>
+              <MainLayout>
+                <AnimatedPage><FitnessChat /></AnimatedPage>
+              </MainLayout>
+            </ProtectedRoute>
+          }
         />
         <Route
           path="/progress"
           element={
             <ProtectedRoute>
               <MainLayout>
-                <Progress />
+                <AnimatedPage><Progress /></AnimatedPage>
               </MainLayout>
             </ProtectedRoute>
           }
@@ -96,7 +98,7 @@ function App() {
           element={
             <ProtectedRoute>
               <MainLayout>
-                <WorkoutHistory />
+                <AnimatedPage><WorkoutHistory /></AnimatedPage>
               </MainLayout>
             </ProtectedRoute>
           }
@@ -104,14 +106,14 @@ function App() {
           <Route
            path="/diet-history"
            element={
-             <ProtectedRoute>
-               <MainLayout>
-                 <DietHistory />
-               </MainLayout>
-             </ProtectedRoute>
-           }
+              <ProtectedRoute>
+                <MainLayout>
+                  <AnimatedPage><DietHistory /></AnimatedPage>
+                </MainLayout>
+              </ProtectedRoute>
+            }
           />
-    </Routes>
+    </Routes></AnimatePresence>
     
     
     
