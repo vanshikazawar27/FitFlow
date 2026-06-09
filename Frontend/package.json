@@ -12,13 +12,16 @@
   "dependencies": {
     "@tailwindcss/vite": "^4.3.0",
     "axios": "^1.17.0",
+    "chart.js": "^4.5.1",
+    "chartjs-plugin-zoom": "^2.2.0",
+    "framer-motion": "^11.18.2",
     "react": "^19.2.6",
+    "react-chartjs-2": "^5.3.1",
     "react-circular-progressbar": "^2.2.0",
     "react-dom": "^19.2.6",
     "react-router-dom": "^7.16.0",
     "recharts": "^3.8.1",
-    "tailwindcss": "^4.3.0",
-    "framer-motion": "^11.0.0"
+    "tailwindcss": "^4.3.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",

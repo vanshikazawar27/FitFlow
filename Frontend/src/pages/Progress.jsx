@@ -328,10 +328,11 @@ function Progress() {
               value={fitnessScore}
               text={`${fitnessScore}%`}
               styles={buildStyles({
-                textSize: "18px",
-                pathColor: "#A3E635",
-                textColor: "#fff",
+                textSize: "20px",
+                pathColor: fitnessScore >= 80 ? "#10b981" : fitnessScore >= 60 ? "#a3e635" : "#f59e0b",
+                textColor: "#1e293b",
                 trailColor: "#E2E8F0",
+                pathTransitionDuration: 0.8,
               })}
             />
           </div>
