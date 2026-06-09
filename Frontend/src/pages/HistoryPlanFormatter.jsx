@@ -16,13 +16,13 @@ export function cleanAndFormatHistoryText(text, renderers) {
   if (cleanedLines.length === 0) return null;
 
   return (
-    <div className="space-y-2 text-slate-300 font-sans leading-relaxed text-sm">
+    <div className="space-y-2 text-slate-700 font-sans leading-relaxed text-sm">
       {cleanedLines.map((line, idx) => {
         let cleanLine = line.trim();
 
-        const isBullet = cleanLine.startsWith("*") || cleanLine.startsWith("-");
+        const isBullet = /^(?:\*|\-)\s+/.test(cleanLine);
         if (isBullet) {
-          cleanLine = cleanLine.replace(/^[\*\-]\s*/, "");
+          cleanLine = cleanLine.replace(/^(?:\*|\-)\s+/, "");
         }
 
         if (cleanLine.startsWith("###")) {
@@ -40,7 +40,7 @@ export function cleanAndFormatHistoryText(text, renderers) {
         const renderedText = parts.map((part, i) => {
           if (i % 2 === 1) {
             return (
-              <strong key={i} className="text-white font-bold">
+              <strong key={i} className="text-slate-900 font-bold">
                 {part}
               </strong>
             );

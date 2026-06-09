@@ -214,25 +214,25 @@ function Progress() {
     <div className="space-y-8 animate-[fadeIn_0.4s_ease-out]">
       
       {/* Title Header Section */}
-      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-800 pb-6">
+      <div className="flex flex-col md:flex-row justify-between items-start md:items-center gap-4 border-b border-slate-200 pb-6">
         <div>
-          <h1 className="text-4xl font-extrabold text-white">Progress Tracker 📈</h1>
-          <p className="text-slate-400 mt-1">Visualize weight timelines, track fitness indexes, and unlock achievements.</p>
+          <h1 className="text-4xl font-extrabold text-slate-900">Progress Tracker 📈</h1>
+          <p className="text-slate-500 mt-1">Visualize weight timelines, track fitness indexes, and unlock achievements.</p>
         </div>
         
         {/* Save Weight & Range Selection Panel */}
-        <div className="flex flex-wrap items-center gap-4 bg-[#0F172A] p-3 rounded-2xl border border-slate-800">
+        <div className="flex flex-wrap items-center gap-4 bg-white p-3 rounded-2xl border border-slate-200">
           <div className="flex items-center gap-2">
             <input
               type="number"
               placeholder="Add weight (kg)..."
               value={weight}
               onChange={(e) => setWeight(e.target.value)}
-              className="bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-3 py-2 w-36 rounded-xl outline-none transition-all text-sm"
+              className="bg-white border border-slate-300 focus:border-[#A3E635] text-slate-900 px-3 py-2 w-36 rounded-xl outline-none transition-all text-sm"
             />
             <button
               onClick={addWeight}
-              className="bg-[#A3E635] hover:bg-[#bbf055] text-slate-950 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md"
+              className="bg-emerald-500 hover:bg-emerald-600 text-slate-950 px-4 py-2 rounded-xl text-sm font-bold transition-all shadow-md"
             >
               Save
             </button>
@@ -243,7 +243,7 @@ function Progress() {
           <select
             value={range}
             onChange={(e) => setRange(e.target.value)}
-            className="bg-[#1E293B] border border-slate-700 focus:border-[#A3E635] text-white px-3 py-2 rounded-xl outline-none text-sm transition-all cursor-pointer"
+            className="bg-white border border-slate-300 focus:border-[#A3E635] text-slate-900 px-3 py-2 rounded-xl outline-none text-sm transition-all cursor-pointer"
           >
             <option value="7d">Last 7 Days</option>
             <option value="30d">Last 30 Days</option>
@@ -256,8 +256,8 @@ function Progress() {
       </div>
 
       {/* Main timeline graph */}
-      <div className="bg-[#0F172A]/80 border border-slate-800 p-6 rounded-2xl shadow-md">
-        <h2 className="text-xl font-bold text-white mb-4">Weight Journey Timeline</h2>
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl shadow-md">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Weight Journey Timeline</h2>
         <div className="w-full h-80 min-h-[320px]">
           <ResponsiveContainer width="100%" height="100%" minHeight={320}>
             <LineChart data={chartData}>
@@ -268,15 +268,15 @@ function Progress() {
                   <stop offset="95%" stopColor="#A3E635" stopOpacity={0.1}/>
                 </linearGradient>
               </defs>
-              <CartesianGrid strokeDasharray="3 3" stroke="#1E293B" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#E2E8F0" />
               <XAxis dataKey="date" stroke="#64748b" fontSize={11} tickLine={false} />
               <YAxis stroke="#64748b" fontSize={11} tickLine={false} domain={['auto', 'auto']} />
               <Tooltip
                 contentStyle={{
-                  backgroundColor: "#0F172A",
-                  borderColor: "#334155",
+                  backgroundColor: "#FFFFFF",
+                  borderColor: "#E2E8F0",
                   borderRadius: "12px",
-                  color: "#fff",
+                  color: "#0F172A",
                 }}
               />
               <Line
@@ -294,25 +294,25 @@ function Progress() {
 
       {/* Grid of stats panels */}
       <div className="grid grid-cols-2 lg:grid-cols-4 gap-6">
-        <div className="bg-[#0F172A]/50 border border-slate-800 p-5 rounded-2xl">
-          <span className="text-slate-400 text-xs font-semibold block uppercase tracking-wider">Current Weight</span>
-          <p className="text-2xl font-extrabold text-[#06B6D4] mt-2">{currentWeight} kg</p>
+        <div className="bg-white border border-slate-200 p-5 rounded-2xl">
+          <span className="text-slate-500 text-xs font-semibold block uppercase tracking-wider">Current Weight</span>
+          <p className="text-2xl font-extrabold text-cyan-600 mt-2">{currentWeight} kg</p>
         </div>
         
-        <div className="bg-[#0F172A]/50 border border-slate-800 p-5 rounded-2xl">
-          <span className="text-slate-400 text-xs font-semibold block uppercase tracking-wider">Starting Weight</span>
+        <div className="bg-white border border-slate-200 p-5 rounded-2xl">
+          <span className="text-slate-500 text-xs font-semibold block uppercase tracking-wider">Starting Weight</span>
           <p className="text-2xl font-extrabold text-purple-400 mt-2">{startingWeight} kg</p>
         </div>
 
-        <div className="bg-[#0F172A]/50 border border-slate-800 p-5 rounded-2xl">
-          <span className="text-slate-400 text-xs font-semibold block uppercase tracking-wider">Total Progress</span>
+        <div className="bg-white border border-slate-200 p-5 rounded-2xl">
+          <span className="text-slate-500 text-xs font-semibold block uppercase tracking-wider">Total Progress</span>
           <p className={`text-2xl font-extrabold mt-2 ${Number(weightChange) >= 0 ? "text-emerald-400" : "text-rose-500"}`}>
             {weightChange > 0 ? `-${weightChange}` : Math.abs(weightChange)} kg
           </p>
         </div>
 
-        <div className="bg-[#0F172A]/50 border border-slate-800 p-5 rounded-2xl">
-          <span className="text-slate-400 text-xs font-semibold block uppercase tracking-wider">Current Streak</span>
+        <div className="bg-white border border-slate-200 p-5 rounded-2xl">
+          <span className="text-slate-500 text-xs font-semibold block uppercase tracking-wider">Current Streak</span>
           <p className="text-2xl font-extrabold text-rose-500 mt-2">🔥 {streak} Days</p>
         </div>
       </div>
@@ -321,8 +321,8 @@ function Progress() {
       <div className="grid md:grid-cols-3 gap-6">
         
         {/* Fitness score circular */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 p-6 rounded-2xl flex flex-col items-center justify-center text-center">
-          <h3 className="text-lg font-bold text-white mb-4">Fitness Status Score</h3>
+        <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col items-center justify-center text-center">
+          <h3 className="text-lg font-bold text-slate-900 mb-4">Fitness Status Score</h3>
           <div className="w-28 h-28 mb-4">
             <CircularProgressbar
               value={fitnessScore}
@@ -331,33 +331,33 @@ function Progress() {
                 textSize: "18px",
                 pathColor: "#A3E635",
                 textColor: "#fff",
-                trailColor: "#1E293B",
+                trailColor: "#E2E8F0",
               })}
             />
           </div>
-          <p className="text-xl font-bold text-white">
+          <p className="text-xl font-bold text-slate-900">
             {fitnessScore >= 80 ? "Excellent 🔥" : fitnessScore >= 60 ? "Good Shape 💪" : "In Progress ⚡"}
           </p>
-          <p className="text-xs text-slate-400 mt-2">Combined index of BMI targets, consistency patterns, and log frequency.</p>
+          <p className="text-xs text-slate-500 mt-2">Combined index of BMI targets, consistency patterns, and log frequency.</p>
         </div>
 
         {/* Prediction Panel */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
           <div>
-            <h3 className="text-lg font-bold text-white mb-2">AI Weight Prediction 🔮</h3>
-            <p className="text-slate-400 text-xs leading-relaxed">
+            <h3 className="text-lg font-bold text-slate-900 mb-2">AI Weight Prediction 🔮</h3>
+            <p className="text-slate-500 text-xs leading-relaxed">
               Based on historical data loops and calorie intake parameters, your estimated body metrics projection.
             </p>
           </div>
           
           <div className="my-6 space-y-3">
             <div className="flex justify-between text-sm">
-              <span className="text-slate-400">Average Weekly Shift</span>
-              <span className="font-semibold text-white">{averageWeightLossPerEntry} kg</span>
+              <span className="text-slate-500">Average Weekly Shift</span>
+              <span className="font-semibold text-slate-900">{averageWeightLossPerEntry} kg</span>
             </div>
-            <div className="flex justify-between text-sm border-t border-slate-800 pt-3">
-              <span className="text-[#A3E635] font-semibold">Predicted (30 Days)</span>
-              <span className="font-bold text-[#A3E635]">{predictedWeight30Days} kg</span>
+            <div className="flex justify-between text-sm border-t border-slate-200 pt-3">
+              <span className="text-emerald-600 font-semibold">Predicted (30 Days)</span>
+              <span className="font-bold text-emerald-600">{predictedWeight30Days} kg</span>
             </div>
           </div>
           
@@ -365,28 +365,28 @@ function Progress() {
         </div>
 
         {/* Goal Progress bar */}
-        <div className="bg-[#0F172A]/80 border border-slate-800 p-6 rounded-2xl flex flex-col justify-between">
+        <div className="bg-white border border-slate-200 p-6 rounded-2xl flex flex-col justify-between">
           <div>
-            <h3 className="text-lg font-bold text-white mb-1">Goal Alignment 🎯</h3>
-            <p className="text-slate-400 text-xs">Distance tracking to your target configuration.</p>
+            <h3 className="text-lg font-bold text-slate-900 mb-1">Goal Alignment 🎯</h3>
+            <p className="text-slate-500 text-xs">Distance tracking to your target configuration.</p>
           </div>
           
           <div className="my-6">
-            <div className="flex justify-between text-xs text-slate-400 mb-2">
+            <div className="flex justify-between text-xs text-slate-500 mb-2">
               <span>Goal: {goalWeight || "Not Set"} kg</span>
               <span>{progressPercent}% Complete</span>
             </div>
-            <div className="w-full bg-slate-800 rounded-full h-3 overflow-hidden">
+            <div className="w-full bg-slate-200 rounded-full h-3 overflow-hidden">
               <div
-                className="bg-[#A3E635] h-full rounded-full transition-all duration-500"
+                className="bg-emerald-500 h-full rounded-full transition-all duration-500"
                 style={{ width: `${progressPercent}%` }}
               />
             </div>
           </div>
 
-          <div className="flex justify-between text-xs text-slate-400">
+          <div className="flex justify-between text-xs text-slate-500">
             <span>Remaining Target:</span>
-            <span className="font-bold text-white">
+            <span className="font-bold text-slate-900">
               {goalWeight ? `${Math.abs(currentWeight - goalWeight).toFixed(1)} kg` : "--"}
             </span>
           </div>
@@ -395,21 +395,21 @@ function Progress() {
       </div>
 
       {/* Achievements / Badges Container */}
-      <div className="bg-[#0F172A]/50 border border-slate-800 p-6 rounded-2xl">
-        <h2 className="text-xl font-bold text-white mb-4">Milestones Unlocked 🏆</h2>
+      <div className="bg-white border border-slate-200 p-6 rounded-2xl">
+        <h2 className="text-xl font-bold text-slate-900 mb-4">Milestones Unlocked 🏆</h2>
         {badges.length > 0 ? (
           <div className="flex flex-wrap gap-3">
             {badges.map((badge, index) => (
               <span
                 key={index}
-                className="bg-[#A3E635]/10 text-[#A3E635] border border-[#A3E635]/20 px-4 py-2 rounded-xl text-sm font-semibold tracking-wide"
+                className="bg-emerald-500/10 text-emerald-600 border border-[#A3E635]/20 px-4 py-2 rounded-xl text-sm font-semibold tracking-wide"
               >
                 🏅 {badge}
               </span>
             ))}
           </div>
         ) : (
-          <p className="text-slate-400 text-sm">No milestones unlocked yet. Continue logging your weights daily to gain entry achievements!</p>
+          <p className="text-slate-500 text-sm">No milestones unlocked yet. Continue logging your weights daily to gain entry achievements!</p>
         )}
       </div>
 

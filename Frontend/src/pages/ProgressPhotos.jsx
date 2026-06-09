@@ -101,7 +101,7 @@
 
 //         <button
 //           onClick={uploadPhoto}
-//           className="bg-blue-600 text-white px-5 py-2 rounded-lg ml-4"
+//           className="bg-blue-600 text-slate-900 px-5 py-2 rounded-lg ml-4"
 //         >
 //           Upload
 //         </button>

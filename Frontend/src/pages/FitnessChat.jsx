@@ -64,18 +64,18 @@ function FitnessChat() {
   return (
     <div className="space-y-6 flex flex-col h-[calc(100vh-12rem)] animate-[fadeIn_0.4s_ease-out]">
       {/* Title Header */}
-      <div className="border-b border-slate-800 pb-4 flex items-center gap-3">
+      <div className="border-b border-slate-200 pb-4 flex items-center gap-3">
         <div className="w-12 h-12 rounded-full bg-indigo-600/10 border border-indigo-550/30 flex items-center justify-center text-2xl">
           🤖
         </div>
         <div>
-          <h1 className="text-3xl font-extrabold text-white">AI Fitness Coach</h1>
-          <p className="text-slate-400 text-sm mt-0.5">Your 24/7 personal training assistant.</p>
+          <h1 className="text-3xl font-extrabold text-slate-900">AI Fitness Coach</h1>
+          <p className="text-slate-500 text-sm mt-0.5">Your 24/7 personal training assistant.</p>
         </div>
       </div>
 
       {/* Chat Messages Log */}
-      <div className="flex-1 bg-[#0F172A]/40 border border-slate-850 rounded-3xl p-6 overflow-y-auto space-y-4 min-h-0 custom-scrollbar">
+      <div className="flex-1 bg-white border border-slate-850 rounded-3xl p-6 overflow-y-auto space-y-4 min-h-0 custom-scrollbar">
         {messages.map((msg, index) => {
           const isUser = msg.sender === "user";
           return (
@@ -84,8 +84,8 @@ function FitnessChat() {
               {/* Avatar */}
               <div className={`w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0 text-sm font-bold ${
                 isUser
-                  ? "bg-[#A3E635] text-slate-950"
-                  : "bg-indigo-600 text-white"
+                  ? "bg-emerald-500 text-slate-950"
+                  : "bg-indigo-600 text-slate-900"
               }`}>
                 {isUser ? "👤" : "🤖"}
               </div>
@@ -93,8 +93,8 @@ function FitnessChat() {
               {/* Message Bubble */}
               <div className={`rounded-2xl p-4 text-sm leading-relaxed shadow-sm relative ${
                 isUser
-                  ? "bg-[#1E293B] text-slate-100 rounded-tr-none border border-slate-800"
-                  : "bg-[#151D30] text-slate-100 rounded-tl-none border border-slate-850"
+                  ? "bg-white text-slate-800 rounded-tr-none border border-slate-200"
+                  : "bg-indigo-50 text-slate-800 rounded-tl-none border border-indigo-100"
               }`}>
                 <p className="whitespace-pre-wrap">{msg.text}</p>
                 <span className="text-[10px] text-slate-500 block mt-2 text-right">{msg.timestamp}</span>
@@ -106,14 +106,14 @@ function FitnessChat() {
         {/* Loading Indicator */}
         {loading && (
           <div className="flex gap-3 max-w-[80%]">
-            <div className="w-8 h-8 rounded-full bg-indigo-600 text-white flex items-center justify-center flex-shrink-0 text-sm">
+            <div className="w-8 h-8 rounded-full bg-indigo-600 text-slate-900 flex items-center justify-center flex-shrink-0 text-sm">
               🤖
             </div>
-            <div className="bg-[#151D30] text-slate-100 rounded-2xl rounded-tl-none p-4 border border-slate-850">
+            <div className="bg-[#151D30] text-slate-800 rounded-2xl rounded-tl-none p-4 border border-slate-850">
               <div className="flex items-center gap-1.5 py-1">
-                <span className="w-2.5 h-2.5 bg-[#A3E635] rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
-                <span className="w-2.5 h-2.5 bg-[#A3E635] rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
-                <span className="w-2.5 h-2.5 bg-[#A3E635] rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
+                <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '0ms' }} />
+                <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '150ms' }} />
+                <span className="w-2.5 h-2.5 bg-emerald-500 rounded-full animate-bounce" style={{ animationDelay: '300ms' }} />
               </div>
             </div>
           </div>
@@ -121,19 +121,19 @@ function FitnessChat() {
       </div>
 
       {/* Input Action Form */}
-      <form onSubmit={askQuestion} className="flex gap-3 bg-[#0F172A] p-2.5 rounded-2xl border border-slate-800">
+      <form onSubmit={askQuestion} className="flex gap-3 bg-white p-2.5 rounded-2xl border border-slate-200">
         <input
           type="text"
           value={question}
           onChange={(e) => setQuestion(e.target.value)}
           placeholder="Ask about workout forms, nutrition targets..."
-          className="flex-1 bg-transparent text-white px-4 py-2.5 outline-none text-sm placeholder-slate-600"
+          className="flex-1 bg-transparent text-slate-900 px-4 py-2.5 outline-none text-sm placeholder-slate-400"
           disabled={loading}
         />
         <button
           type="submit"
           disabled={loading || !question.trim()}
-          className="bg-[#A3E635] hover:bg-[#bbf055] disabled:bg-slate-800 disabled:text-slate-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm transition-all"
+          className="bg-emerald-500 hover:bg-emerald-600 disabled:bg-slate-200 disabled:text-slate-500 text-slate-950 font-bold px-6 py-2.5 rounded-xl text-sm transition-all"
         >
           Send
         </button>

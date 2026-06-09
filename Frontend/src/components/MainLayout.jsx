@@ -41,19 +41,19 @@ function MainLayout({ children }) {
   ];
 
   return (
-    <div className="min-h-screen bg-[#0B0F19] text-gray-100 flex">
+    <div className="min-h-screen bg-slate-50 text-slate-900 flex">
       {/* Sidebar */}
-      <aside className={`w-72 bg-[#0F172A] border-r border-slate-800 flex flex-col justify-between transition-all duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} fixed lg:static z-50 h-full`}>
+      <aside className={`w-72 bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} fixed lg:static z-50 h-full shadow-lg`}>
         <div>
           {/* Logo */}
-          <div className="p-6 flex items-center justify-between border-b border-slate-800">
+          <div className="p-6 flex items-center justify-between border-b border-slate-200">
             <Link to="/dashboard" className="flex items-center gap-3">
               <span className="text-2xl">⚡</span>
-              <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-lime-400 to-emerald-400 bg-clip-text text-transparent">
+              <span className="font-extrabold text-xl tracking-wider bg-gradient-to-r from-emerald-600 to-teal-500 bg-clip-text text-transparent">
                 FITFLOW
               </span>
             </Link>
-            <button className="lg:hidden text-gray-400 hover:text-white" onClick={() => setIsSidebarOpen(false)}>
+            <button className="lg:hidden text-slate-500 hover:text-slate-900" onClick={() => setIsSidebarOpen(false)}>
               ✕
             </button>
           </div>
@@ -68,8 +68,8 @@ function MainLayout({ children }) {
                   to={item.path}
                   className={`flex items-center gap-4 px-4 py-3.5 rounded-xl font-medium transition-all duration-200 group ${
                     isActive
-                      ? "bg-[#A3E635] text-slate-950 shadow-[0_4px_20px_rgba(163,230,53,0.3)] font-bold scale-[1.02]"
-                      : "text-slate-400 hover:text-white hover:bg-slate-800/50"
+                      ? "bg-emerald-50 text-emerald-700 shadow-[0_4px_20px_rgba(16,185,129,0.15)] font-bold scale-[1.02] border border-emerald-100"
+                      : "text-slate-500 hover:text-slate-900 hover:bg-slate-50"
                   }`}
                 >
                   <span className={`text-xl transition-transform duration-200 group-hover:scale-110 ${isActive ? "" : "opacity-80"}`}>
@@ -83,21 +83,21 @@ function MainLayout({ children }) {
         </div>
 
         {/* User Card & Logout */}
-        <div className="p-4 border-t border-slate-800 bg-[#0A0F1D]">
+        <div className="p-4 border-t border-slate-200 bg-slate-50/50">
           {user && (
-            <div className="flex items-center gap-3 mb-4 p-2 rounded-xl bg-slate-900/50">
-              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-lime-400 to-emerald-500 flex items-center justify-center font-bold text-slate-950 text-lg shadow-inner">
+            <div className="flex items-center gap-3 mb-4 p-2 rounded-xl bg-white border border-slate-100 shadow-sm">
+              <div className="w-10 h-10 rounded-full bg-gradient-to-br from-emerald-400 to-teal-500 flex items-center justify-center font-bold text-white text-lg shadow-inner">
                 {user.name ? user.name[0].toUpperCase() : "U"}
               </div>
               <div className="flex-1 min-w-0">
-                <p className="text-sm font-semibold truncate text-white">{user.name}</p>
-                <p className="text-xs text-slate-400 truncate">{user.goal || "Fitness Enthusiast"}</p>
+                <p className="text-sm font-semibold truncate text-slate-900">{user.name}</p>
+                <p className="text-xs text-slate-500 truncate">{user.goal || "Fitness Enthusiast"}</p>
               </div>
             </div>
           )}
           <AnimatedButton
             onClick={handleLogout}
-            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-950/40 hover:bg-red-900/40 text-red-400 hover:text-red-300 font-medium transition-colors duration-200 border border-red-900/30"
+            className="w-full flex items-center justify-center gap-2 px-4 py-2.5 rounded-xl bg-red-50 hover:bg-red-100 text-red-600 hover:text-red-700 font-medium transition-colors duration-200 border border-red-100"
           >
             <span>🚪 Logout</span>
           </AnimatedButton>
@@ -107,33 +107,33 @@ function MainLayout({ children }) {
       {/* Main Content Area */}
       <div className="flex-1 flex flex-col min-w-0 overflow-y-auto">
         {/* Top Navbar */}
-        <header className="bg-[#0F172A]/85 backdrop-blur-md sticky top-0 z-40 border-b border-slate-850 px-6 py-4 flex items-center justify-between">
+        <header className="bg-white/80 backdrop-blur-md sticky top-0 z-40 border-b border-slate-200 px-6 py-4 flex items-center justify-between shadow-sm">
           <button
-            className="lg:hidden text-slate-400 hover:text-white text-2xl mr-4"
+            className="lg:hidden text-slate-500 hover:text-slate-900 text-2xl mr-4"
             onClick={() => setIsSidebarOpen(true)}
           >
             ☰
           </button>
           
           <div className="flex-1">
-            <span className="text-slate-400 text-sm font-medium">Welcome back,</span>
-            <h2 className="text-lg font-bold text-white">{user?.name || "Fitness Partner"} 👋</h2>
+            <span className="text-slate-500 text-sm font-medium">Welcome back,</span>
+            <h2 className="text-lg font-bold text-slate-900">{user?.name || "Fitness Partner"} 👋</h2>
           </div>
 
           <div className="flex items-center gap-6">
             {user && (
-              <div className="hidden sm:flex items-center gap-4 text-sm border-l border-slate-800 pl-6">
+              <div className="hidden sm:flex items-center gap-4 text-sm border-l border-slate-200 pl-6">
                 <div>
-                  <span className="text-slate-400 text-xs block">Weight</span>
-                  <span className="font-semibold text-white">{user.weight || "--"} kg</span>
+                  <span className="text-slate-500 text-xs block">Weight</span>
+                  <span className="font-semibold text-slate-900">{user.weight || "--"} kg</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Height</span>
-                  <span className="font-semibold text-white">{user.height || "--"} cm</span>
+                  <span className="text-slate-500 text-xs block">Height</span>
+                  <span className="font-semibold text-slate-900">{user.height || "--"} cm</span>
                 </div>
                 <div>
-                  <span className="text-slate-400 text-xs block">Goal</span>
-                  <span className="font-semibold text-[#A3E635]">{user.goal || "Not Set"}</span>
+                  <span className="text-slate-500 text-xs block">Goal</span>
+                  <span className="font-semibold text-emerald-600">{user.goal || "Not Set"}</span>
                 </div>
               </div>
             )}

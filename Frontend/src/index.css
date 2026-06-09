@@ -8,8 +8,8 @@
 }
 
 body {
-  background-color: #0b0f19;
-  color: #f3f4f6;
+  background-color: #F8FAFC; /* Slate 50 */
+  color: #0F172A; /* Slate 900 */
   margin: 0;
   padding: 0;
   -webkit-font-smoothing: antialiased;
@@ -22,27 +22,45 @@ body {
   height: 8px;
 }
 ::-webkit-scrollbar-track {
-  background: #0b0f19;
+  background: #F1F5F9; /* Slate 100 */
 }
 ::-webkit-scrollbar-thumb {
-  background: #1e293b;
+  background: #CBD5E1; /* Slate 300 */
   border-radius: 4px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #a3e635;
+  background: #94A3B8; /* Slate 400 */
 }
 
-/* Glassmorphism Classes */
+/* Glassmorphism Classes for Light Theme */
 .glass-panel {
-  background: rgba(21, 29, 48, 0.7);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  border: 1px solid rgba(255, 255, 255, 0.05);
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.05);
 }
 
 .glass-card {
-  background: rgba(30, 41, 59, 0.45);
-  backdrop-filter: blur(8px);
-  -webkit-backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.03);
+  background: rgba(255, 255, 255, 0.85);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.6);
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.04);
+}
+
+/* Custom Animations */
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes float {
+  0% { transform: translateY(0px); }
+  50% { transform: translateY(-10px); }
+  100% { transform: translateY(0px); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
 }
