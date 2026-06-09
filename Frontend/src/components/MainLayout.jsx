@@ -4,7 +4,7 @@ import AnimatedButton from "./AnimatedButton";
 
 function MainLayout({ children }) {
   const [user, setUser] = useState(null);
-  const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+  const [isSidebarOpen, setIsSidebarOpen] = useState(false);
   const navigate = useNavigate();
   const location = useLocation();
 
@@ -42,8 +42,16 @@ function MainLayout({ children }) {
 
   return (
     <div className="min-h-screen bg-slate-50 text-slate-900 flex">
+      {/* Mobile Overlay */}
+      {isSidebarOpen && (
+        <div 
+          className="fixed inset-0 bg-slate-900/50 backdrop-blur-sm z-40 lg:hidden transition-opacity duration-300"
+          onClick={() => setIsSidebarOpen(false)}
+        />
+      )}
+
       {/* Sidebar */}
-      <aside className={`w-72 bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} fixed lg:static z-50 h-full shadow-lg`}>
+      <aside className={`w-72 bg-white border-r border-slate-200 flex flex-col justify-between transition-all duration-300 ${isSidebarOpen ? "translate-x-0" : "-translate-x-full lg:translate-x-0"} fixed lg:static z-50 h-full shadow-lg lg:shadow-none`}>
         <div>
           {/* Logo */}
           <div className="p-6 flex items-center justify-between border-b border-slate-200">
@@ -66,6 +74,7 @@ function MainLayout({ children }) {
                 <Link
                   key={item.path}
                   to={item.path}
+                  onClick={() => window.innerWidth < 1024 && setIsSidebarOpen(false)}
                   className={`flex items-center gap-4 px-4 py-3.5 rounded-xl font-medium transition-all duration-200 group ${
                     isActive
                       ? "bg-emerald-50 text-emerald-700 shadow-[0_4px_20px_rgba(16,185,129,0.15)] font-bold scale-[1.02] border border-emerald-100"
