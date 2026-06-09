@@ -35,7 +35,26 @@ function WorkoutPlan() {
 
   const formatPlanText = (text) => {
     if (!text) return null;
-    const lines = text.split("\n");
+    const rawLines = text.split("\n");
+
+    // Remove Note/Disclaimer sections entirely
+    let inSkipBlock = false;
+    const lines = rawLines.filter((line) => {
+      const t = line.trim().toLowerCase();
+      if (/^#+\s*(note|disclaimer|important note|please note)/.test(t) || /^\*\*(note|disclaimer)/.test(t)) {
+        inSkipBlock = true;
+        return false;
+      }
+      if (inSkipBlock) {
+        // Stop skipping when next heading starts
+        if (/^#+\s/.test(line.trim()) && !/^#+\s*(note|disclaimer)/i.test(line.trim())) {
+          inSkipBlock = false;
+          return true;
+        }
+        return false;
+      }
+      return true;
+    });
     return (
       <div className="space-y-2 text-slate-700 font-sans leading-relaxed text-sm">
         {lines.map((line, idx) => {

@@ -3,13 +3,27 @@ export function cleanAndFormatHistoryText(text, renderers) {
 
   const { renderHeading, renderBullet, renderParagraph } = renderers;
 
-  const lines = String(text).split("\n");
+  const rawLines = String(text).split("\n");
 
-  // Remove divider/artifact lines like "*****" that sometimes appear in AI output.
-  const cleanedLines = lines.filter((line) => {
+  // Remove Note/Disclaimer sections and divider lines
+  let inSkipBlock = false;
+  const cleanedLines = rawLines.filter((line) => {
     const t = (line ?? "").trim();
     if (!t) return false;
     if (/^[*\-\s]{3,}$/.test(t)) return false;
+
+    const lower = t.toLowerCase();
+    if (/^#+\s*(note|disclaimer|important note|please note)/i.test(t) || /^\*\*(note|disclaimer)/i.test(t)) {
+      inSkipBlock = true;
+      return false;
+    }
+    if (inSkipBlock) {
+      if (/^#+\s/.test(t) && !/^#+\s*(note|disclaimer)/i.test(t)) {
+        inSkipBlock = false;
+        return true;
+      }
+      return false;
+    }
     return true;
   });
 
