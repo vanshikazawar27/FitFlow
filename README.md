@@ -1,6 +1,6 @@
 # 🏋️ FitFlow – AI Personal Fitness Coach
 
-FitFlow is a full-stack AI-powered fitness platform that helps users achieve their health goals through personalized workout plans, diet recommendations, progress tracking, and an AI fitness assistant.
+FitFlow is a full-stack AI-powered fitness platform that helps users achieve their health and fitness goals through personalized workout plans, AI-generated diet recommendations, progress tracking, and an intelligent fitness assistant.
 
 ---
 
@@ -15,56 +15,70 @@ FitFlow is a full-stack AI-powered fitness platform that helps users achieve the
 
 ### 💪 AI Workout Planner
 
-* Generate personalized workout plans using AI
-* Plans based on:
+Generate personalized workout plans based on:
 
-  * Weight
-  * Height
-  * Age
-  * Fitness Goal
-  * Experience Level
-* Save workout history
+* Weight
+* Height
+* Age
+* Fitness Goal
+* Experience Level
+
+Features:
+
+* AI-generated workout recommendations
+* Personalized exercise schedules
+* Workout history tracking
 
 ### 🥗 AI Diet Planner
 
-* Generate personalized diet plans using AI
-* Supports:
+Generate customized diet plans based on:
 
-  * Vegetarian
-  * Non-Vegetarian
-  * Vegan Diets
+* Vegetarian Diet
+* Non-Vegetarian Diet
+* Vegan Diet
+
+Features:
+
 * Budget-based meal recommendations
+* Personalized nutrition guidance
 * Diet history tracking
 
-### 🤖 AI Fitness Chat Assistant
+### 🤖 AI Fitness Assistant
 
-* Interactive fitness chatbot
-* Answers workout, diet, and fitness-related questions
-* Powered by OpenRouter AI Models
+An AI-powered chatbot that helps users with:
+
+* Workout suggestions
+* Nutrition advice
+* Fitness-related questions
+* General health recommendations
+
+Powered by OpenRouter AI Models.
 
 ### 📈 Progress Tracker
 
-* Weight tracking
-* Fitness score calculation
-* Goal progress monitoring
-* BMI insights
-* Weight prediction analytics
-* Achievement badges
-* Progress visualization using Recharts
+Track your fitness journey with:
+
+* Weight Monitoring
+* BMI Analysis
+* Fitness Score Calculation
+* Goal Progress Tracking
+* Weight Prediction Analytics
+* Achievement Badges
+* Interactive Progress Charts
 
 ### 📚 History Management
 
 * Workout Plan History
 * Diet Plan History
-* Easy access to previously generated plans
+* Quick access to previously generated plans
 
-### 🎨 Modern UI
+### 🎨 Modern UI/UX
 
-* Responsive design
-* Animated page transitions
-* Toast notifications
-* Particle background effects
-* Mobile-friendly interface
+* Fully Responsive Design
+* Smooth Page Transitions
+* Toast Notifications
+* Particle Background Effects
+* Mobile-Friendly Experience
 
 ---
 
@@ -75,10 +89,10 @@ FitFlow is a full-stack AI-powered fitness platform that helps users achieve the
 * React.js
 * React Router DOM
 * Tailwind CSS
-* Recharts
 * Framer Motion
-* React Hot Toast
+* Recharts
 * Axios
+* React Hot Toast
 
 ### Backend
 
@@ -102,29 +116,35 @@ FitFlow/
 │
 ├── frontend/
 │   ├── src/
+│   │   ├── assets/
 │   │   ├── pages/
 │   │   ├── components/
 │   │   ├── services/
-│   │   └── routes/
+│   │   ├── routes/
+│   │   └── App.jsx
 │   │
 │   └── package.json
 │
 ├── backend/
 │   ├── controllers/
+│   ├── middleware/
 │   ├── models/
 │   ├── routes/
-│   ├── middleware/
+│   ├── config/
 │   └── server.js
 │
-└── README.md
+├── README.md
+└── .gitignore
 ```
+
+---
 
 ## ⚙️ Installation
 
 ### Clone Repository
 
 ```bash
-git clone https://github.com/yourusername/fitflow.git
+git clone https://github.com/vanshikazawar27/fitflow.git
 cd fitflow
 ```
 
@@ -135,7 +155,7 @@ cd backend
 npm install
 ```
 
-Create `.env`
+Create a `.env` file inside the backend directory:
 
 ```env
 PORT=5000
@@ -147,7 +167,7 @@ JWT_SECRET=your_jwt_secret
 OPENROUTER_API_KEY=your_openrouter_api_key
 ```
 
-Run Backend
+Run Backend:
 
 ```bash
 npm run dev
@@ -157,13 +177,16 @@ npm run dev
 
 ```bash
 cd frontend
-
 npm install
+```
 
+Install additional packages if needed:
+
+```bash
 npm install framer-motion react-hot-toast recharts axios
 ```
 
-Run Frontend
+Run Frontend:
 
 ```bash
 npm run dev
@@ -173,7 +196,7 @@ npm run dev
 
 ## 🌐 Environment Variables
 
-### Backend
+### Backend (.env)
 
 ```env
 PORT=5000
@@ -186,20 +209,29 @@ OPENROUTER_API_KEY=
 
 ## 📸 Screenshots
 
-Add screenshots here:
+### Dashboard
 
 ![Dashboard](./src/assets/dashboard1.png)
+
 ![Dashboard](./src/assets/dashboard2.png)
+
+### Workout Planner
 
 ![Workout Plan](./src/assets/workoutplan.png)
 
+### Diet Planner
+
 ![Diet Plan](./src/assets/dietplan.png)
+
+### AI Fitness Assistant
 
 ![AI Chat](./src/assets/aichat.png)
 
-![Progress Tracker](./src/assets/progresstracker1.png)
-![Progress Tracker](./src/assets/progresstracker2.png)
+### Progress Tracker
 
+![Progress Tracker](./src/assets/progresstracker1.png)
+
+![Progress Tracker](./src/assets/progresstracker2.png)
 
 ---
 
@@ -207,11 +239,39 @@ Add screenshots here:
 
 * Exercise Library API Integration
 * Progress Photo Uploads
-* Fitness Challenges & Leaderboards
-* Wearable Device Integration
 * AI Meal Scanner
-* Voice-based AI Fitness Coach
+* Voice-Based AI Fitness Coach
+* Wearable Device Integration
+* Fitness Challenges & Leaderboards
 * Social Fitness Community
+* Smart Goal Recommendations
+
+---
+
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create your feature branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Add feature"
+```
+
+4. Push to the branch
+
+```bash
+git push origin feature-name
+```
+
+5. Open a Pull Request
 
 ---
 
@@ -224,8 +284,17 @@ Aspiring Full Stack Developer | AI Enthusiast
 GitHub: https://github.com/vanshikazawar27
 
 LinkedIn: https://www.linkedin.com/in/vanshikazawar/
+
 ---
 
 ## ⭐ Support
 
 If you found this project useful, please consider giving it a ⭐ on GitHub.
+
+Your support motivates future improvements and development.
+
+---
+
+## 📄 License
+
+This project is licensed under the MIT License.
