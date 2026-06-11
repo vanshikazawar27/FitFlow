@@ -188,11 +188,18 @@ OPENROUTER_API_KEY=
 
 Add screenshots here:
 
-* Dashboard
-* Workout Planner
-* Diet Planner
-* AI Chat
-* Progress Tracker
+![Dashboard](./src/assets/dashboard1.png)
+![Dashboard](./src/assets/dashboard2.png)
+
+![Workout Plan](./src/assets/workoutplan.png)
+
+![Diet Plan](./src/assets/dietplan.png)
+
+![AI Chat](./src/assets/aichat.png)
+
+![Progress Tracker](./src/assets/progresstracker1.png)
+![Progress Tracker](./src/assets/progresstracker2.png)
+
 
 ---
 
@@ -214,10 +221,9 @@ Add screenshots here:
 
 Aspiring Full Stack Developer | AI Enthusiast
 
-GitHub: https://github.com/yourusername
+GitHub: https://github.com/vanshikazawar27
 
-LinkedIn: https://linkedin.com/in/yourprofile
-
+LinkedIn: https://www.linkedin.com/in/vanshikazawar/
 ---
 
 ## ⭐ Support
