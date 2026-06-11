@@ -209,29 +209,17 @@ OPENROUTER_API_KEY=
 
 ## 📸 Screenshots
 
-### Dashboard
+![Dashboard](./frontend/src/assets/dashboard1.png)
+![Dashboard](./frontend/src/assets/dashboard2.png)
 
-![Dashboard](./src/assets/dashboard1.png)
+![Workout Plan](./frontend/src/assets/workoutplan.png)
 
-![Dashboard](./src/assets/dashboard2.png)
+![Diet Plan](./frontend/src/assets/dietplan.png)
 
-### Workout Planner
+![AI Chat](./frontend/src/assets/aichat.png)
 
-![Workout Plan](./src/assets/workoutplan.png)
-
-### Diet Planner
-
-![Diet Plan](./src/assets/dietplan.png)
-
-### AI Fitness Assistant
-
-![AI Chat](./src/assets/aichat.png)
-
-### Progress Tracker
-
-![Progress Tracker](./src/assets/progresstracker1.png)
-
-![Progress Tracker](./src/assets/progresstracker2.png)
+![Progress Tracker](./frontend/src/assets/progresstracker1.png)
+![Progress Tracker](./frontend/src/assets/progresstracker2.png)
 
 ---
 
