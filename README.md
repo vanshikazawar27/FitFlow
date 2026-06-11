@@ -209,17 +209,17 @@ OPENROUTER_API_KEY=
 
 ## 📸 Screenshots
 
-![Dashboard](./frontend/src/assets/dashboard1.png)
-![Dashboard](./frontend/src/assets/dashboard2.png)
+![Dashboard](./Frontend/src/assets/dashboard1.png)
+![Dashboard](./Frontend/src/assets/dashboard2.png)
 
-![Workout Plan](./frontend/src/assets/workoutplan.png)
+![Workout Plan](./Frontend/src/assets/workoutplan.png)
 
-![Diet Plan](./frontend/src/assets/dietplan.png)
+![Diet Plan](./Frontend/src/assets/dietplan.png)
 
-![AI Chat](./frontend/src/assets/aichat.png)
+![AI Chat](./Frontend/src/assets/aichat.png)
 
-![Progress Tracker](./frontend/src/assets/progresstracker1.png)
-![Progress Tracker](./frontend/src/assets/progresstracker2.png)
+![Progress Tracker](./Frontend/src/assets/progresstracker1.png)
+![Progress Tracker](./Frontend/src/assets/progresstracker2.png)
 
 ---
 
