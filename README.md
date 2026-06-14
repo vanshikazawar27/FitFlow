@@ -3,7 +3,7 @@
 FitFlow is a full-stack AI-powered fitness platform that helps users achieve their health and fitness goals through personalized workout plans, AI-generated diet recommendations, progress tracking, and an intelligent fitness assistant.
 
 ---
-
+  
 ## 🚀 Features
 
 ### 🔐 Authentication & User Management
